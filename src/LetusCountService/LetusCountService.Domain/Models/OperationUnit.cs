@@ -20,11 +20,11 @@
 		/// <summary>
 		/// Navigate to Operation.
 		/// </summary>
-		public required Operation Operation { get; set; }
+		public Operation Operation { get; set; }
 
 		/// <summary>
 		/// Navigation to Banknotes.
 		/// </summary>
-		public required ICollection<Banknote> Banknotes { get; set; }
+		public ICollection<Banknote> Banknotes { get; set; }
 	}
 }

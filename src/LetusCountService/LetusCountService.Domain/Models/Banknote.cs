@@ -30,6 +30,6 @@
 		/// <summary>
 		/// Navigate to OperationUnit.
 		/// </summary>
-		public required OperationUnit OperationUnit { get; set; }
+		public OperationUnit OperationUnit { get; set; }
 	}
 }

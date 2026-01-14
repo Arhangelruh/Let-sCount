@@ -19,7 +19,13 @@ namespace LetusCountService.Infrastructure.Data.Configurations
 
 			builder.Property(operation => operation.MachineSerial)
 				.IsRequired()
-				.HasMaxLength(ConfigurationConstants.SqlMaxLengthLong);
+				.HasMaxLength(ConfigurationConstants.SqlMaxLengthLongMedium);
+
+			builder.Property(operation => operation.StartTime)
+				.HasColumnType("timestamp with time zone");
+
+			builder.Property(operation => operation.EndTime)
+				.HasColumnType("timestamp with time zone");
 		}
 	}
 }

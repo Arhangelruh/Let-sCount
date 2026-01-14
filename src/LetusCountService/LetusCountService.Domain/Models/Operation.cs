@@ -15,16 +15,16 @@
 		/// <summary>
 		/// Start operation time.
 		/// </summary>
-		public DateTime StartTime { get; set; }
+		public DateTimeOffset StartTime { get; set; }
 
 		/// <summary>
 		/// End operation time.
 		/// </summary>
-		public DateTime EndTime { get; set; }
+		public DateTimeOffset EndTime { get; set; }
 
 		/// <summary>
 		///  Navigate to Operation units.
 		/// </summary>
-		public required ICollection<OperationUnit> OperationUnits { get; set; }
+		public ICollection<OperationUnit> OperationUnits { get; set; }
 	}
 }
