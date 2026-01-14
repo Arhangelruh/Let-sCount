@@ -41,22 +41,11 @@ namespace LetusCountService
 
 				_logger.LogInformation("LetUsCountervice started");
 
-				await foreach (var file in _queue.Reader.ReadAllAsync(stoppingToken))
-				{
-					try
-					{
-						await WaitUntilFileIsReadyAsync(file, stoppingToken);
-						await ProcessFileAsync(file, stoppingToken);
-					}
-					catch (OperationCanceledException)
-					{
-						// correct ending.
-					}
-					catch (Exception ex)
-					{
-						_logger.LogError(ex, "Error processing file {File}", file);
-					}
-				}
+
+				var workers = Enumerable.Range(0, _configuration.WorkerCount)
+		        .Select(_ => Task.Run(() => ConsumeAsync(stoppingToken)));
+
+				await Task.WhenAll(workers);
 			}
 			else
 			{
@@ -158,9 +147,7 @@ namespace LetusCountService
 				_logger.LogWarning($"Error: unexpected exception while file: {file} processing");
 				await SendMessageAsync($"Error: unexpected exception while file: {file} processing", ct);
 			}
-
-
-			await Task.Delay(1000, ct);
+			//await Task.Delay(1000, ct);
 
 			_logger.LogInformation("File processed {File}", file);
 		}
@@ -191,6 +178,26 @@ namespace LetusCountService
 			{
 
 				_logger.LogWarning($"Error sending email: {ex.Message}");
+			}
+		}
+
+		private async Task ConsumeAsync(CancellationToken ct)
+		{
+			await foreach (var file in _queue.Reader.ReadAllAsync(ct))
+			{
+				try
+				{
+					await WaitUntilFileIsReadyAsync(file, ct);
+					await ProcessFileAsync(file, ct);
+				}
+				catch (OperationCanceledException)
+				{
+					// correct ending.
+				}
+				catch (Exception ex)
+				{
+					_logger.LogError(ex, "Error processing {File}", file);
+				}
 			}
 		}
 	}
