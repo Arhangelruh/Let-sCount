@@ -1,4 +1,4 @@
-﻿namespace LetusCountService
+﻿namespace LetusCountService.Models
 {
 	public class FolderSettings
 	{

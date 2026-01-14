@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/LetusCountService/LetusCountService.Worker/migration_script.sql
