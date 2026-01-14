@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using LetusCountService.Infrastructure.Xml.Models;
+using System.Xml.Serialization;
 
 public class MachineXml
 {
