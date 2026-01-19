@@ -11,7 +11,6 @@ using LetusCountService.Infrastructure.Files;
 using LetusCountService.Infrastructure.Xml.Services;
 using LetusCountService.Models;
 using LetusCountService.Services;
-using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Extensions.Logging;
@@ -37,10 +36,10 @@ try
 	builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 	builder.Services.AddDbContext<LetusCountServiceContext>(options =>
-    options.UseNpgsql(connection));
+	options.UseNpgsql(connection));
 
 	builder.Services.AddHostedService<FolderProcessingService>();
-	builder.Services.AddScoped(typeof(IWorkerService),typeof(WorkerService));
+	builder.Services.AddScoped(typeof(IWorkerService), typeof(WorkerService));
 	builder.Services.AddScoped<IXmlParser<Operation>, XmlParser>();
 	builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 	builder.Services.AddScoped(typeof(ISaveOperationService), typeof(SaveOperationService));
@@ -51,7 +50,8 @@ try
 	var host = builder.Build();
 	host.Run();
 }
-catch (Exception ex) {
+catch (Exception ex)
+{
 	logger.Error(ex, "Application stopped due to exception");
 	throw;
 }

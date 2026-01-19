@@ -43,7 +43,7 @@ namespace LetusCountService
 
 
 				var workers = Enumerable.Range(0, _configuration.WorkerCount)
-		        .Select(_ => Task.Run(() => ConsumeAsync(stoppingToken)));
+				.Select(_ => Task.Run(() => ConsumeAsync(stoppingToken)));
 
 				await Task.WhenAll(workers);
 			}
@@ -147,7 +147,6 @@ namespace LetusCountService
 				_logger.LogWarning($"Error: unexpected exception while file: {file} processing");
 				await SendMessageAsync($"Error: unexpected exception while file: {file} processing", ct);
 			}
-			//await Task.Delay(1000, ct);
 
 			_logger.LogInformation("File processed {File}", file);
 		}
