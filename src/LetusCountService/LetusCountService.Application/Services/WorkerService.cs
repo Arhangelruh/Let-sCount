@@ -31,6 +31,10 @@ namespace LetusCountService.Application.Services
 
 				await _fileWorker.MoveFile(filePath);
 			}
+			catch (DatabaseNotConfiguredException ex) 
+			{
+				throw new FilePersistenceException(filePath, ex);
+			}
 			catch (FormatException ex)
 			{
 				throw new InvalidFileFormatException(filePath, ex);

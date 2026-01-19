@@ -47,15 +47,20 @@ namespace InternalPortal.Infrastucture.Data.Repository
 			return await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
 		}
 
-		public Task SaveChangesAsync()
+		public async Task SaveChangesAsync()
 		{
 			try
 			{
-				return _context.SaveChangesAsync();
+				await _context.SaveChangesAsync();
 			}
 			catch (DbUpdateException ex)
 			{
 				throw new PersistenceException(ex);
+			}
+			catch (InvalidOperationException ex)
+			when (ex.InnerException.Message.Contains("Failed to connect"))
+			{
+				throw new DatabaseNotConfiguredException(ex);
 			}
 		}
 
