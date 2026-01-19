@@ -3,12 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetusCountService", "src\LetusCountService\LetusCountService.Worker\LetusCountService.csproj", "{B5BED795-1BD0-3371-CA23-61929ADA8319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetusCountService.Infrastructure", "src\LetusCountService\LetusCountService.Infrastructure\LetusCountService.Infrastructure.csproj", "{95003E5B-2935-47F0-BDBF-E76ED357ACAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetusCountService.Application", "src\LetusCountService\LetusCountService.Application\LetusCountService.Application.csproj", "{A2E1BE78-56BE-487A-A3C7-25AC0FBE03A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetusCountService.Domain", "src\LetusCountService\LetusCountService.Domain\LetusCountService.Domain.csproj", "{410498ED-A141-4028-801C-5AF9BE875410}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5BED795-1BD0-3371-CA23-61929ADA8319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5BED795-1BD0-3371-CA23-61929ADA8319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5BED795-1BD0-3371-CA23-61929ADA8319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5BED795-1BD0-3371-CA23-61929ADA8319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95003E5B-2935-47F0-BDBF-E76ED357ACAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95003E5B-2935-47F0-BDBF-E76ED357ACAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95003E5B-2935-47F0-BDBF-E76ED357ACAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95003E5B-2935-47F0-BDBF-E76ED357ACAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E1BE78-56BE-487A-A3C7-25AC0FBE03A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E1BE78-56BE-487A-A3C7-25AC0FBE03A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E1BE78-56BE-487A-A3C7-25AC0FBE03A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E1BE78-56BE-487A-A3C7-25AC0FBE03A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{410498ED-A141-4028-801C-5AF9BE875410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{410498ED-A141-4028-801C-5AF9BE875410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{410498ED-A141-4028-801C-5AF9BE875410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{410498ED-A141-4028-801C-5AF9BE875410}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6148BFD4-2C0B-4DAF-9A57-112553C57A25}
 	EndGlobalSection
 EndGlobal
