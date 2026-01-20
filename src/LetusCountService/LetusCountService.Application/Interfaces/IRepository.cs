@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace InternalPortal.Core.Interfaces
+namespace LetusCountService.Application.Interfaces
 {
 	/// <summary>
 	/// Generic repository provide all base needed methods (CRUD)

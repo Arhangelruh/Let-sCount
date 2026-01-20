@@ -1,10 +1,10 @@
-﻿using InternalPortal.Core.Interfaces;
-using LetusCountService.Application.Exceptions;
+﻿using LetusCountService.Application.Exceptions;
+using LetusCountService.Application.Interfaces;
 using LetusCountService.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace InternalPortal.Infrastucture.Data.Repository
+namespace LetusCountService.Infrastucture.Data.Repository
 {
 	/// <inheritdoc cref="IRepository<T>"/>
 	public class Repository<T>(LetusCountServiceContext context) : IRepository<T> where T : class
