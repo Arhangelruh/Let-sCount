@@ -1,5 +1,3 @@
-using InternalPortal.Core.Interfaces;
-using InternalPortal.Infrastucture.Data.Repository;
 using LetusCountService;
 using LetusCountService.Application.Interfaces;
 using LetusCountService.Application.Services;
@@ -9,6 +7,7 @@ using LetusCountService.Infrastructure.EMail;
 using LetusCountService.Infrastructure.EMail.Models;
 using LetusCountService.Infrastructure.Files;
 using LetusCountService.Infrastructure.Xml.Services;
+using LetusCountService.Infrastucture.Data.Repository;
 using LetusCountService.Models;
 using LetusCountService.Services;
 using Microsoft.EntityFrameworkCore;

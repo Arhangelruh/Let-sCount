@@ -1,5 +1,4 @@
-﻿using InternalPortal.Core.Interfaces;
-using LetusCountService.Application.Interfaces;
+﻿using LetusCountService.Application.Interfaces;
 using LetusCountService.Domain.Models;
 
 namespace LetusCountService.Application.Services
