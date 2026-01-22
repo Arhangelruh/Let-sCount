@@ -1,0 +1,22 @@
+﻿<html>
+	<head>
+	   <meta name="viewport" content="width=device-width" />
+	   <title>@ViewBag.Title</title>
+	   <link href="~/css/app.css" rel="stylesheet" asp-append-version="true" />
+	   <link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
+	   @RenderSection("css", false)
+	</head>
+	<body>
+		<header>
+		    <div class="container">
+			<div class="header-wrapper">
+				<p>Hello world</p>
+			</div>
+		    </div>
+		</header>	
+	<div class="container">
+		@RenderBody()
+	</div>
+	@RenderSection("js", false)
+	</body>
+</html>
