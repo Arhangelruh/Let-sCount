@@ -16,7 +16,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
                 name: "dep");
 
             migrationBuilder.CreateTable(
-                name: "CashMashines",
+                name: "CashMachines",
                 schema: "dep",
                 columns: table => new
                 {
@@ -26,7 +26,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CashMashines", x => x.Id);
+                    table.PrimaryKey("PK_CashMachines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,29 +67,29 @@ namespace LetusCountApplication.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CashCashMashines",
+                name: "CashCashMachines",
                 schema: "dep",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CashId = table.Column<int>(type: "integer", nullable: false),
-                    CashMashineId = table.Column<int>(type: "integer", nullable: false),
+                    CashMachineId = table.Column<int>(type: "integer", nullable: false),
                     StartWorking = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndWorking = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CashCashMashines", x => x.Id);
+                    table.PrimaryKey("PK_CashCashMachines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CashCashMashines_CashMashines_CashMashineId",
-                        column: x => x.CashMashineId,
+                        name: "FK_CashCashMachines_CashMachines_CashMachineId",
+                        column: x => x.CashMachineId,
                         principalSchema: "dep",
-                        principalTable: "CashMashines",
+                        principalTable: "CashMachines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CashCashMashines_Cashes_CashId",
+                        name: "FK_CashCashMachines_Cashes_CashId",
                         column: x => x.CashId,
                         principalSchema: "dep",
                         principalTable: "Cashes",
@@ -98,16 +98,16 @@ namespace LetusCountApplication.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CashCashMashines_CashId",
+                name: "IX_CashCashMachines_CashId",
                 schema: "dep",
-                table: "CashCashMashines",
+                table: "CashCashMachines",
                 column: "CashId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CashCashMashines_CashMashineId",
+                name: "IX_CashCashMachines_CashMachineId",
                 schema: "dep",
-                table: "CashCashMashines",
-                column: "CashMashineId");
+                table: "CashCashMachines",
+                column: "CashMachineId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cashes_DepartmentId",
@@ -120,11 +120,11 @@ namespace LetusCountApplication.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CashCashMashines",
+                name: "CashCashMachines",
                 schema: "dep");
 
             migrationBuilder.DropTable(
-                name: "CashMashines",
+                name: "CashMachines",
                 schema: "dep");
 
             migrationBuilder.DropTable(

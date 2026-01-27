@@ -13,9 +13,9 @@
 		public required string Name { get; set; }
 
 		/// <summary>
-		/// Navigation to CashCashMashine.
+		/// Navigation to CashCashMachine.
 		/// </summary>
-		public ICollection<CashCashMashine> CashCashMashines { get; set; }
+		public ICollection<CashCashMachine> CashCashMachines { get; set; }
 
 		/// <summary>
 		/// Department identifier.

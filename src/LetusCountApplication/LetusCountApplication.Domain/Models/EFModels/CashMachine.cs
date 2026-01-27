@@ -13,8 +13,8 @@
 		public required string Serial { get; set; }
 
 		/// <summary>
-		/// Navigation to CashCashMashine.
+		/// Navigation to CashCashMachine.
 		/// </summary>
-		public ICollection<CashCashMashine> CashCashMashine { get; set; }
+		public ICollection<CashCashMachine> CashCashMachine { get; set; }
 	}
 }

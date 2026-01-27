@@ -1,6 +1,6 @@
 ﻿namespace LetusCountApplication.Domain.Models.EFModels
 {
-	public class CashCashMashine
+	public class CashCashMachine
 	{
 		/// <summary>
 		/// Id.
@@ -18,9 +18,9 @@
 		public Cash Cash { get; set; }
 
 		/// <summary>
-		/// CashMashine identifier.
+		/// CashMachine identifier.
 		/// </summary>
-		public int CashMashineId { get; set; }
+		public int CashMachineId { get; set; }
 
 		/// <summary>
 		/// Navigate to CashMachine.
@@ -28,12 +28,12 @@
 		public CashMachine CashMachine { get; set; }
 
 		/// <summary>
-		/// Date time when cash mashine start to work.
+		/// Date time when cash machine start to work.
 		/// </summary>
 		public DateTime StartWorking { get; set; }
 
 		/// <summary>
-		/// Date time when cash mashine finish working.
+		/// Date time when cash machine finish working.
 		/// </summary>
 		public DateTime? EndWorking { get; set; }
 	}

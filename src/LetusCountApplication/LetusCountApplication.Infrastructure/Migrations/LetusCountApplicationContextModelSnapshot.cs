@@ -45,7 +45,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     b.ToTable("Cashes", "dep");
                 });
 
-            modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashCashMashine", b =>
+            modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashCashMachine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,7 +56,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     b.Property<int>("CashId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CashMashineId")
+                    b.Property<int>("CashMachineId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("EndWorking")
@@ -69,9 +69,9 @@ namespace LetusCountApplication.Infrastructure.Migrations
 
                     b.HasIndex("CashId");
 
-                    b.HasIndex("CashMashineId");
+                    b.HasIndex("CashMachineId");
 
-                    b.ToTable("CashCashMashines", "dep");
+                    b.ToTable("CashCashMachines", "dep");
                 });
 
             modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashMachine", b =>
@@ -89,7 +89,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CashMashines", "dep");
+                    b.ToTable("CashMachines", "dep");
                 });
 
             modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.Department", b =>
@@ -126,17 +126,17 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashCashMashine", b =>
+            modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashCashMachine", b =>
                 {
                     b.HasOne("LetusCountApplication.Domain.Models.EFModels.Cash", "Cash")
-                        .WithMany("CashCashMashines")
+                        .WithMany("CashCashMachines")
                         .HasForeignKey("CashId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("LetusCountApplication.Domain.Models.EFModels.CashMachine", "CashMachine")
-                        .WithMany("CashCashMashine")
-                        .HasForeignKey("CashMashineId")
+                        .WithMany("CashCashMachine")
+                        .HasForeignKey("CashMachineId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -147,12 +147,12 @@ namespace LetusCountApplication.Infrastructure.Migrations
 
             modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.Cash", b =>
                 {
-                    b.Navigation("CashCashMashines");
+                    b.Navigation("CashCashMachines");
                 });
 
             modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.CashMachine", b =>
                 {
-                    b.Navigation("CashCashMashine");
+                    b.Navigation("CashCashMachine");
                 });
 
             modelBuilder.Entity("LetusCountApplication.Domain.Models.EFModels.Department", b =>

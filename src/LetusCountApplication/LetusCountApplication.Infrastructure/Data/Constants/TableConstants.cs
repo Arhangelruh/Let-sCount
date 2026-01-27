@@ -14,13 +14,13 @@
 		public const string Cashes = nameof(Cashes);
 
 		/// <summary>
-		/// CashMashines.
+		/// CashMachines.
 		/// </summary>
-		public const string CashMashines = nameof(CashMashines);
+		public const string CashMachines = nameof(CashMachines);
 
 		/// <summary>
-		/// CashCashMashines.
+		/// CashCashMachines.
 		/// </summary>
-		public const string CashCashMashines = nameof(CashCashMashines);
+		public const string CashCashMachines = nameof(CashCashMachines);
 	}
 }

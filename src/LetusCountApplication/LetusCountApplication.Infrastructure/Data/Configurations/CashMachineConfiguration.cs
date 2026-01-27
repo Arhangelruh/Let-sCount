@@ -15,7 +15,7 @@ namespace LetusCountApplication.Infrastructure.Data.Configurations
 		{
 			_ = builder ?? throw new ArgumentNullException(nameof(builder));
 
-			builder.ToTable(TableConstants.CashMashines, SchemaConstants.Departments)
+			builder.ToTable(TableConstants.CashMachines, SchemaConstants.Departments)
 			   .HasKey(cm => cm.Id);
 
 			builder.Property(cm => cm.Serial)
