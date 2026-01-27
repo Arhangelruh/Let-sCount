@@ -12,5 +12,15 @@
 		/// Cash.
 		/// </summary>
 		public const string Cashes = nameof(Cashes);
+
+		/// <summary>
+		/// CashMashines.
+		/// </summary>
+		public const string CashMashines = nameof(CashMashines);
+
+		/// <summary>
+		/// CashCashMashines.
+		/// </summary>
+		public const string CashCashMashines = nameof(CashCashMashines);
 	}
 }

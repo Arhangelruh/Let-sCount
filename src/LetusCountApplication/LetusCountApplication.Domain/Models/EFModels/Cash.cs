@@ -13,9 +13,9 @@
 		public required string Name { get; set; }
 
 		/// <summary>
-		/// Kisan number.
+		/// Navigation to CashCashMashine.
 		/// </summary>
-		public required string Kisan { get; set; }
+		public ICollection<CashCashMashine> CashCashMashines { get; set; }
 
 		/// <summary>
 		/// Department identifier.

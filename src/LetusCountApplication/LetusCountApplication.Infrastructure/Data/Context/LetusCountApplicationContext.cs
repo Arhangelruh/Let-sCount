@@ -16,11 +16,23 @@ namespace LetusCountApplication.Infrastructure.Data.Context
 		/// </summary>
 		public DbSet<Cash> Cashes { get; set; }
 
+		/// <summary>
+		/// Cash mashines.
+		/// </summary>
+		public DbSet<CashMachine> CashMachines { get; set; }
+
+		/// <summary>
+		/// Connecting table for cashes and cashmashines.
+		/// </summary>
+		public DbSet<CashCashMashine> CashCashMashines { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
 			modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-			modelBuilder.ApplyConfiguration(new CashConfiguration());			
+			modelBuilder.ApplyConfiguration(new CashConfiguration());
+			modelBuilder.ApplyConfiguration(new CashMachineConfiguration());
+			modelBuilder.ApplyConfiguration(new CashCashMashineConfiguration());
 
 			base.OnModelCreating(modelBuilder);
 		}
