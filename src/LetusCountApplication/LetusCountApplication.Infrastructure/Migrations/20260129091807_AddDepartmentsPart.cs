@@ -22,7 +22,8 @@ namespace LetusCountApplication.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Serial = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false)
+                    Serial = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
+                    Number = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {

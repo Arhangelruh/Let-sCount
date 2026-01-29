@@ -13,6 +13,11 @@
 		public required string Serial { get; set; }
 
 		/// <summary>
+		/// Inventory number.
+		/// </summary>
+		public required string Number { get; set; }
+
+		/// <summary>
 		/// Navigation to CashCashMachine.
 		/// </summary>
 		public ICollection<CashCashMachine> CashCashMachine { get; set; }
