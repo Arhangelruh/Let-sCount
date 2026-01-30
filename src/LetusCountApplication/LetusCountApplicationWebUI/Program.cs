@@ -1,4 +1,5 @@
-using LetusCountApplication.Infrastructure.Data.Context;
+using LetusCountApplication.Application;
+using LetusCountApplication.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -10,14 +11,10 @@ try
 {
 	var builder = WebApplication.CreateBuilder(args);
 
-
-	string connection = builder.Configuration.GetConnectionString("LetUsCountDatabase");
-
-	builder.Services.AddDbContext<LetusCountApplicationContext>(options =>
-	options.UseNpgsql(connection));
 	builder.Logging.ClearProviders();
 	builder.Host.UseNLog();
-
+	builder.Services.AddApplication();
+	builder.Services.AddInfrastructure(builder.Configuration);
 	builder.Services.AddControllersWithViews();
 
 	// Add services to the container.
