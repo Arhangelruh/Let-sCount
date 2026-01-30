@@ -23,8 +23,7 @@ namespace LetusCountApplication.Infrastructure.Data.Configurations
 				.HasMaxLength(FieldLengthsConstants.MaxLengthShort);
 
 			builder.Property(cm => cm.Number)
-				.IsRequired()
-				.HasMaxLength(FieldLengthsConstants.MaxLengthShort);
+				.IsRequired();
 		}
 	}
 }

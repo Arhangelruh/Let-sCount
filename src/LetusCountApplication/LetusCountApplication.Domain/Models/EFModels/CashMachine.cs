@@ -15,7 +15,7 @@
 		/// <summary>
 		/// Inventory number.
 		/// </summary>
-		public required string Number { get; set; }
+		public required int Number { get; set; }
 
 		/// <summary>
 		/// Navigation to CashCashMachine.
