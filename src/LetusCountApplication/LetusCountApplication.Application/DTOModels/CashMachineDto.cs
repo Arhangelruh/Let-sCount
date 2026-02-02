@@ -18,6 +18,11 @@
 		public required int Number {  get; set; }
 
 		/// <summary>
+		/// Cash id.
+		/// </summary>
+		public int CashId {  get; set; }
+
+		/// <summary>
 		/// Time when cash machine started work.
 		/// </summary>
 		public DateTime StartWorking {  get; set; }

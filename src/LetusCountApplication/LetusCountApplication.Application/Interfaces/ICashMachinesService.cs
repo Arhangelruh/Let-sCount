@@ -23,15 +23,19 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <param name="cashMachineId">CashMachine id</param>
 		/// <returns>CashMachine dto model</returns>
-		Task <CashMachineDto> GetCashMachineByIdAsync(int cashMachineId);
+		Task <CashMachineDto>? GetCashMachineByIdAsync(int cashMachineId);
 
 		/// <summary>
 		/// Get cash machines by cash id.
 		/// </summary>
 		/// <param name="cashId"></param>
-		/// <returns></returns>
+		/// <returns>List of cash machines</returns>
 		Task<List<CashMachineDto>> GetCashMashinesByCashAsync(int cashId);
 
-
+		/// <summary>
+		/// Get all cash machines.
+		/// </summary>
+		/// <returns>List of cash machines</returns>
+		Task<List<CashMachineDto>> GetAllCashMachinesAsync();
 	}
 }

@@ -11,5 +11,10 @@
 		/// Cash desk name.
 		/// </summary>
 		public required string Name { get; set; }
+
+		/// <summary>
+		/// Connection to department.
+		/// </summary>
+		public required int DepartmentId { get; set; }
 	}
 }

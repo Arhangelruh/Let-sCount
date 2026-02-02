@@ -14,7 +14,7 @@ namespace LetusCountApplication.Application.Interfaces
 		/// Delete cash.
 		/// </summary>
 		/// <param name="cashDto">Cash dto model</param>		
-		Task DeleteCashAsync(CashDto cashDto);
+		Task<bool> DeleteCashAsync(CashDto cashDto);
 
 		/// <summary>
 		/// Edit cash.
@@ -27,7 +27,7 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <param name="id">Cash id</param>
 		/// <returns>Cash dto model</returns>
-		Task<CashDto> GetCashByIdAsync(int id);
+		Task<CashDto>? GetCashByIdAsync(int id);
 
 		/// <summary>
 		/// Get cash by department.
