@@ -1,5 +1,5 @@
 ﻿using LetusCountApplication.Application.Interfaces;
-using LetusCountApplication.Domain.Models.EFModels;
+using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-﻿using LetusCountApplication.Domain.Models.EFModels;
+﻿using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure.Data.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
