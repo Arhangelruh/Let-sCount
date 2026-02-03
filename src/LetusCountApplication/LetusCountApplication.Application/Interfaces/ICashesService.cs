@@ -42,5 +42,11 @@ namespace LetusCountApplication.Application.Interfaces
 		/// <param name="cashDto">Cash dto model</param>
 		/// <returns></returns>
 		Task AddCashMachineToCashAsync(CashMachineDto cashMachineDto);
+
+		/// <summary>
+		/// Change status if cash were closed or reopen.
+		/// </summary>
+		/// <param name="id">Cash id</param>
+		Task ChangeCashStatusAsync(int id);
 	}
 }

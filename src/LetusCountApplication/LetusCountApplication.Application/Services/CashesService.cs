@@ -17,7 +17,8 @@ namespace LetusCountApplication.Application.Services
 			var newCash = new Cash
 			{
 				Name = cashDto.Name,
-				DepartmentId = cashDto.DepartmentId
+				DepartmentId = cashDto.DepartmentId,
+				WorkStatus = true
 			};
 
 			_db.Cashes.Add(newCash);
@@ -52,6 +53,16 @@ namespace LetusCountApplication.Application.Services
 				StartWorking = time
 			});
 			await _db.SaveChangesAsync();
+		}
+
+		public async Task ChangeCashStatusAsync(int id)
+		{
+			var cash = await _db.Cashes.FirstOrDefaultAsync(c => c.Id == id);
+			if (cash != null)
+			{
+				cash.WorkStatus = !cash.WorkStatus;
+				await _db.SaveChangesAsync();
+			}
 		}
 
 		public async Task<bool> DeleteCashAsync(CashDto cashDto)
@@ -97,7 +108,8 @@ namespace LetusCountApplication.Application.Services
 				{
 					Id = c.Id,
 					Name = c.Name,
-					DepartmentId = c.DepartmentId
+					DepartmentId = c.DepartmentId,
+					IsActive = c.WorkStatus
 				})
 				.FirstOrDefaultAsync();
 			
@@ -113,11 +125,14 @@ namespace LetusCountApplication.Application.Services
 				{
 					Id = c.Id,
 					Name = c.Name,
-					DepartmentId = c.DepartmentId
+					DepartmentId = c.DepartmentId,
+					IsActive= c.WorkStatus
 				})
 				.ToListAsync();
 
 			return cashes;
 		}
+
+
 	}
 }
