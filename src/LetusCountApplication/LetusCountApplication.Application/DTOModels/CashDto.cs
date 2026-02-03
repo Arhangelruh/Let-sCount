@@ -16,5 +16,10 @@
 		/// Connection to department.
 		/// </summary>
 		public required int DepartmentId { get; set; }
+
+		/// <summary>
+		/// Cash status.
+		/// </summary>
+		public required bool IsActive {  get; set; }
 	}
 }

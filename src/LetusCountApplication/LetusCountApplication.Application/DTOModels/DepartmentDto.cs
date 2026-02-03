@@ -16,5 +16,10 @@
 		/// Department address.
 		/// </summary>
 		public string? Address { get; set; }
+
+		/// <summary>
+		/// Department status.
+		/// </summary>
+		public required bool IsActive { get; set; }
 	}
 }
