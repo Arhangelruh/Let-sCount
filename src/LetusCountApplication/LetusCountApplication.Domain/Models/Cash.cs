@@ -26,5 +26,10 @@
 		/// Navigate to Operation.
 		/// </summary>
 		public Department Department { get; set; }
+
+		/// <summary>
+		/// Cash status, true if it active.
+		/// </summary>
+		public bool WorkStatus { get; set; }
 	}
 }

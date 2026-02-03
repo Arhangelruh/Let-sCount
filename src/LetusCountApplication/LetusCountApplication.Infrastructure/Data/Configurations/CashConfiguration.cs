@@ -22,6 +22,9 @@ namespace LetusCountApplication.Infrastructure.Data.Configurations
 				.IsRequired()
 				.HasMaxLength(FieldLengthsConstants.MaxLengthShortMedium);
 
+			builder.Property(cash => cash.WorkStatus)
+				.IsRequired();
+
 			builder.HasOne(department => department.Department)
 			 .WithMany(cash => cash.Cashes)
 			 .HasForeignKey(cash => cash.DepartmentId)

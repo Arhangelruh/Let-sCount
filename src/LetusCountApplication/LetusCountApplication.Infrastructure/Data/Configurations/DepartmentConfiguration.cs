@@ -25,6 +25,9 @@ namespace LetusCountApplication.Infrastructure.Data.Configurations
 			builder.Property(department => department.Address)
 				.IsRequired()
 				.HasMaxLength(FieldLengthsConstants.MaxLengthLongMedium);
+
+			builder.Property(dep => dep.WorkStatus)
+				.IsRequired();
 		}
 	}
 }

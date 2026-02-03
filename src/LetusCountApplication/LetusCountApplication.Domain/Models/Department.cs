@@ -18,6 +18,11 @@
 		public string? Address { get; set; }
 
 		/// <summary>
+		/// Department status, true if it active.
+		/// </summary>
+		public bool WorkStatus { get; set; }
+
+		/// <summary>
 		///  Navigate to Operation units.
 		/// </summary>
 		public ICollection<Cash> Cashes { get; set; }
