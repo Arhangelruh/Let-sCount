@@ -23,7 +23,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Serial = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
-                    Number = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false)
+                    Number = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +38,8 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Address = table.Column<string>(type: "character varying(450)", maxLength: 450, nullable: false)
+                    Address = table.Column<string>(type: "character varying(450)", maxLength: 450, nullable: false),
+                    WorkStatus = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +54,8 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    DepartmentId = table.Column<int>(type: "integer", nullable: false)
+                    DepartmentId = table.Column<int>(type: "integer", nullable: false),
+                    WorkStatus = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

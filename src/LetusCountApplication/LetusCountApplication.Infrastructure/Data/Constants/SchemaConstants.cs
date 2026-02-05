@@ -6,5 +6,10 @@
 		/// Departments.
 		/// </summary>
 		public const string Departments = "dep";
+
+		/// <summary>
+		/// Operations.
+		/// </summary>
+		public const string Operations = "opr";
 	}
 }

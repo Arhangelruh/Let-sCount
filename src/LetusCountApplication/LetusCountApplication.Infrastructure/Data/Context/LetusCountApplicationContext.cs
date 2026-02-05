@@ -1,6 +1,7 @@
 ﻿using LetusCountApplication.Application.Interfaces;
 using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure.Data.Configurations;
+using LetusCountApplication.Infrastructure.Data.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace LetusCountApplication.Infrastructure.Data.Context
@@ -27,6 +28,21 @@ namespace LetusCountApplication.Infrastructure.Data.Context
 		/// </summary>
 		public DbSet<CashCashMachine> CashCashMachines { get; set; } = null!;
 
+		/// <summary>
+		/// Operations.
+		/// </summary>
+		public DbSet<Operation> Operations { get; set; } = null!;
+
+		/// <summary>
+		/// Operation units.
+		/// </summary>
+		public DbSet<OperationUnit> OperationUnits { get; set; } = null!;
+
+		/// <summary>
+		/// Banknotes.
+		/// </summary>
+		public DbSet<Banknote> Banknotes { get; set; } = null!;
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
@@ -34,6 +50,18 @@ namespace LetusCountApplication.Infrastructure.Data.Context
 			modelBuilder.ApplyConfiguration(new CashConfiguration());
 			modelBuilder.ApplyConfiguration(new CashMachineConfiguration());
 			modelBuilder.ApplyConfiguration(new CashCashMachineConfiguration());
+
+			modelBuilder.ApplyConfiguration(new OperationConfiguration());
+			modelBuilder.Entity<Operation>()
+			 .ToTable(TableConstants.Operations, SchemaConstants.Operations, t => t.ExcludeFromMigrations());
+
+			modelBuilder.ApplyConfiguration(new OperationUnitConfiguration());
+			modelBuilder.Entity<OperationUnit>()
+			 .ToTable(TableConstants.OperationUnits, SchemaConstants.Operations, t => t.ExcludeFromMigrations());
+
+			modelBuilder.ApplyConfiguration(new BanknoteConfiguration());
+			modelBuilder.Entity<Banknote>()
+			.ToTable(TableConstants.Banknotes, SchemaConstants.Operations, t => t.ExcludeFromMigrations());
 
 			base.OnModelCreating(modelBuilder);
 		}
