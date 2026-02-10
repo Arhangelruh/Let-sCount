@@ -15,7 +15,7 @@
 		/// <summary>
 		/// Inventory number.
 		/// </summary>
-		public required int Number {  get; set; }
+		public required string Number {  get; set; }
 
 		/// <summary>
 		/// Cash id.

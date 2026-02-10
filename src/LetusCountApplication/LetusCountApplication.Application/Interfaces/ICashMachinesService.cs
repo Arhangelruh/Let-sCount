@@ -37,5 +37,13 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <returns>List of cash machines</returns>
 		Task<List<CashMachineDto>> GetAllCashMachinesAsync();
+
+		/// <summary>
+		/// Get cash machines by serial or number.
+		/// </summary>
+		/// <param name="serial">Serial number</param>
+		/// <param name="number">Inventory number</param>
+		/// <returns>List of cash machines</returns>
+		Task<List<CashMachineDto>> GetCashMachineBySerialOrNumberAsync(string serial, string number);
 	}
 }

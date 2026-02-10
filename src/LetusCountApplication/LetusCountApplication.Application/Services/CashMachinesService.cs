@@ -115,5 +115,19 @@ namespace LetusCountApplication.Application.Services
 			}
 			return allMachines;
 		}
+
+		public async Task<List<CashMachineDto>> GetCashMachineBySerialOrNumberAsync(string serial, string number)
+		{
+			return await _db.CashMachines
+				.AsNoTracking()
+				.Where(cm=>cm.Serial == serial ||  cm.Number == number)
+				.Select(cm => new CashMachineDto
+				{
+					Id = cm.Id,
+					Serial = cm.Serial,
+					Number = cm.Number
+				})
+				.ToListAsync();							
+		}
 	}
 }
