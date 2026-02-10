@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LetusCountApplication.Infrastructure.Migrations
 {
     [DbContext(typeof(LetusCountApplicationContext))]
-    [Migration("20260203095851_AddDepartmentsPart")]
+    [Migration("20260210090357_AddDepartmentsPart")]
     partial class AddDepartmentsPart
     {
         /// <inheritdoc />
@@ -123,8 +123,10 @@ namespace LetusCountApplication.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Number")
-                        .HasColumnType("integer");
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<string>("Serial")
                         .IsRequired()
