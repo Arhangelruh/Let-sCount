@@ -82,52 +82,73 @@ namespace LetusCountApplication.Application.Services
 			return getCashMachines;
 		}
 
-		public async Task<List<CashMachineDto>> GetAllCashMachinesAsync()
+		public async Task<List<CashMachineDto>> GetAllActiveCashMachinesAsync()
 		{
-			var getAllMachines = await _db.CashMachines
-			.AsNoTracking()
-			.OrderBy(x => x.Id)
-			.ToListAsync();
+			var result = await _db.CashMachines
+	         .AsNoTracking()
+	         .Join(
+		           _db.CashCashMachines
+			       .GroupBy(x => x.CashMachineId)
+			       .Select(g => g.OrderByDescending(x => x.StartWorking).First()),
+		           cm => cm.Id,
+		           ccm => ccm.CashMachineId,
+		           (cm, ccm) => new CashMachineDto
+		           {
+			          Id = cm.Id,
+			          Serial = cm.Serial,
+			          Number = cm.Number,
+			          CashId = cm.Id,
+			          StartWorking = ccm.StartWorking,
+			          EndWorking = ccm.EndWorking
+		           }
+	               )
+	         .ToListAsync();
 
-			List<CashMachineDto> allMachines = [];
-
-			if (getAllMachines.Count != 0)
-			{
-				foreach (var cashMachine in getAllMachines)
-				{
-					var lastConnectionWithCash = await _db.CashCashMachines
-						.AsNoTracking()
-						.Where(c => c.CashMachineId == cashMachine.Id)
-						.OrderByDescending(x => x.Id)
-						.FirstOrDefaultAsync();
-
-					if (lastConnectionWithCash != null)
-						allMachines.Add(new CashMachineDto
-						{
-							Id = cashMachine.Id,
-							Serial = cashMachine.Serial,
-							Number = cashMachine.Number,
-							CashId = cashMachine.Id,
-							StartWorking = lastConnectionWithCash.StartWorking,
-							EndWorking = lastConnectionWithCash.EndWorking
-						});
-				}
-			}
-			return allMachines;
+			return result;
 		}
 
 		public async Task<List<CashMachineDto>> GetCashMachineBySerialOrNumberAsync(string serial, string number)
 		{
 			return await _db.CashMachines
 				.AsNoTracking()
-				.Where(cm=>cm.Serial == serial ||  cm.Number == number)
+				.Where(cm => cm.Serial == serial || cm.Number == number)
 				.Select(cm => new CashMachineDto
 				{
 					Id = cm.Id,
 					Serial = cm.Serial,
 					Number = cm.Number
 				})
-				.ToListAsync();							
+				.ToListAsync();
+		}
+
+		public async Task<List<CashMachineDto>> GetAllCashMachinesAsync()
+		{
+			var result = await _db.CashMachines
+	          .AsNoTracking()
+	          .GroupJoin(
+		           _db.CashCashMachines,
+               		cm => cm.Id,
+		            ccm => ccm.CashMachineId,
+		            (cm, ccmGroup) => new
+		            {
+			          CashMachine = cm,
+			          LastConnection = ccmGroup
+				      .OrderByDescending(x => x.StartWorking)
+				      .FirstOrDefault()
+		            }
+	             )
+	               .Select(x => new CashMachineDto
+	               {
+		             Id = x.CashMachine.Id,
+		             Serial = x.CashMachine.Serial,
+		             Number = x.CashMachine.Number,
+		             CashId = x.CashMachine.Id,
+					   StartWorking = x.LastConnection != null ? x.LastConnection.StartWorking : null,
+					   EndWorking = x.LastConnection != null ? x.LastConnection.EndWorking : null
+	                })
+	                .ToListAsync();
+
+			return result;
 		}
 	}
 }

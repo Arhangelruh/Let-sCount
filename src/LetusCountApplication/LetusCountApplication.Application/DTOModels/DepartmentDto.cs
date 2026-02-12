@@ -21,5 +21,10 @@
 		/// Department status.
 		/// </summary>
 		public required bool IsActive { get; set; }
+
+		/// <summary>
+		/// Cash list.
+		/// </summary>
+		public List<CashDto> Cashes { get; set; }
 	}
 }

@@ -70,7 +70,15 @@ namespace LetusCountApplication.Application.Services
 					Id = dep.Id,
 					Name = dep.Name,
 					Address = dep.Address,
-					IsActive = dep.WorkStatus
+					IsActive = dep.WorkStatus,
+					Cashes = dep.Cashes
+					.Select(c=> new CashDto { 
+					  Id=c.Id,
+					  Name=c.Name,
+					  DepartmentId=c.DepartmentId,
+					  IsActive=c.WorkStatus
+					})
+					.ToList()					
 				})
 				.ToListAsync();
 

@@ -25,7 +25,7 @@
 		/// <summary>
 		/// Time when cash machine started work.
 		/// </summary>
-		public DateTime StartWorking {  get; set; }
+		public DateTime? StartWorking {  get; set; }
 
 		/// <summary>
 		/// Time when cash machine finished work.
