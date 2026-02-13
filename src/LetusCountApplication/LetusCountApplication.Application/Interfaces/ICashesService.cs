@@ -8,7 +8,7 @@ namespace LetusCountApplication.Application.Interfaces
 		/// Add cash.
 		/// </summary>
 		/// <param name="cashDto">Cash dto model</param>		
-		Task AddCashAsync(CashDto cashDto);
+		Task<int> AddCashAsync(CashDto cashDto);
 
 		/// <summary>
 		/// Delete cash.

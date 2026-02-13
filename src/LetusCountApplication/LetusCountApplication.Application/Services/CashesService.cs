@@ -10,7 +10,7 @@ namespace LetusCountApplication.Application.Services
 	{
 		private readonly IApplicationDbContext _db = db ?? throw new ArgumentNullException(nameof(db));
 
-		public async Task AddCashAsync(CashDto cashDto)
+		public async Task<int> AddCashAsync(CashDto cashDto)
 		{
 			ArgumentNullException.ThrowIfNull(cashDto);
 
@@ -23,6 +23,8 @@ namespace LetusCountApplication.Application.Services
 
 			_db.Cashes.Add(newCash);
 			await _db.SaveChangesAsync();
+
+			return newCash.Id;
 		}
 
 		public async Task AddCashMachineToCashAsync(CashMachineDto cashMachineDto)
