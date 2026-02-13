@@ -6,17 +6,18 @@
 	   <link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
 	   @RenderSection("css", false)
 	</head>
-	<body>
-		<header>
-		    <div class="container">
-			<div class="header-wrapper">
-				<p>Hello world</p>
+	<body>		
+    	<sidebar>
+		<a class="nav-logo" href="#">Navbar</a>
+			<div class="nav-menu">
+				<div class="nav-item">Поиск по номеру</div>
+			    <div class="nav-item">Список подразделений</div>
 			</div>
-		    </div>
-		</header>	
-	<div class="container">
+		</sidebar>	
+
+	<div class="container">		
 		@RenderBody()
 	</div>
-	@RenderSection("js", false)
+	@RenderSection("js", false)	
 	</body>
 </html>

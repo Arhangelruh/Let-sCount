@@ -1,0 +1,29 @@
+﻿@{
+	ViewData["Title"] = "Let's count configuration";
+}
+<div class="wrapper">
+	<div class="page-body">
+		<div class="configure-link-block">
+		    <a class="configure-link" asp-controller="CashMachineConfiguration" asp-action="CashMachines">
+				<div class="configure-button block-background">
+					<div class="configure-button-content">
+					   <img class="configure-button-img" src="~/images/Money.svg" />
+					   <div class="configure-button-label">Конфигурация Kisan</div>
+					</div>
+				</div>
+		    </a>
+			<a class="configure-link" asp-controller="Department" asp-action="Departments">
+				<div class="configure-button block-background">
+					<div class="configure-button-content">
+						<img class="configure-button-img" src="~/images/Bank.svg" />
+						<div class="configure-button-label">Конфигурация Точек</div>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+@section css {
+	<link href="~/css/configuration.css" rel="stylesheet" asp-append-version="true" />
+}
