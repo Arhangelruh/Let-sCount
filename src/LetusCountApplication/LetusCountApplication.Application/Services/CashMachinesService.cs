@@ -82,7 +82,7 @@ namespace LetusCountApplication.Application.Services
 			return getCashMachines;
 		}
 
-		public async Task<List<CashMachineDto>> GetAllActiveCashMachinesAsync()
+		public async Task<List<CashMachineDto>> GetAllAvailableCashMachinesAsync()
 		{
 			var result = await _db.CashMachines
 	         .AsNoTracking()
