@@ -2,6 +2,7 @@
 using LetusCountApplication.Application.Interfaces;
 using LetusCountApplication.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace LetusCountApplication.Application.Services
 {
@@ -86,24 +87,18 @@ namespace LetusCountApplication.Application.Services
 		{
 			var result = await _db.CashMachines
 	         .AsNoTracking()
-			 .Where(cm=>cm!.CashCashMachine.Any() || cm.CashCashMachine.All(ccm => ccm.EndWorking != null))
-			  .Select(cm => new
-			  {
-				  Machine = cm,
-				  LastRecord = cm.CashCashMachine
-			.OrderByDescending(ccm => ccm.StartWorking)
-			.FirstOrDefault()
-			  })
-           	.Select(x => new CashMachineDto
-	        {
-	        	Id = x.Machine.Id,
-		        Serial = x.Machine.Serial,
-		        Number = x.Machine.Number,
-	        	CashId = x.LastRecord != null ? x.LastRecord.CashId : 0,
-	        	StartWorking = x.LastRecord != null ? x.LastRecord.StartWorking : null,
-	        	EndWorking = x.LastRecord != null ? x.LastRecord.EndWorking : null
-	        })
-	        .ToListAsync();
+			 .Where(cm =>
+		            !_db.CashCashMachines
+			        .Any(ccm => ccm.CashMachineId == cm.Id
+						&& ccm.EndWorking == null)
+                 	)
+	                .Select(cm => new CashMachineDto
+                   	{
+		            Id = cm.Id,
+		            Serial = cm.Serial,
+	            	Number = cm.Number
+	               })
+			.ToListAsync();
 
 			return result;
 		}
