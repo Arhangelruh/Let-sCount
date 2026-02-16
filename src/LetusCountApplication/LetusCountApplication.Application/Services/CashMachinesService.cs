@@ -83,6 +83,23 @@ namespace LetusCountApplication.Application.Services
 			return getCashMachines;
 		}
 
+		public async Task<CashMachineDto> GetConnectedToCashCashMachineAsync(int cashId)
+		{
+			var cashMachine = await _db.CashMachines
+				.AsNoTracking()
+				.Where(cm =>
+						   cm.CashCashMachine.Any(ccm => ccm.CashId == cashId && ccm.EndWorking == null))
+				.Select(cm => new CashMachineDto
+				{
+					Id = cm.Id,
+					Serial = cm.Serial,
+					Number= cm.Number
+				})
+				.FirstOrDefaultAsync();
+
+			return cashMachine;
+		}
+
 		public async Task<List<CashMachineDto>> GetAllAvailableCashMachinesAsync()
 		{
 			var result = await _db.CashMachines
@@ -92,12 +109,12 @@ namespace LetusCountApplication.Application.Services
 			        .Any(ccm => ccm.CashMachineId == cm.Id
 						&& ccm.EndWorking == null)
                  	)
-	                .Select(cm => new CashMachineDto
-                   	{
-		            Id = cm.Id,
-		            Serial = cm.Serial,
-	            	Number = cm.Number
-	               })
+	         .Select(cm => new CashMachineDto
+              {
+		        Id = cm.Id,
+		        Serial = cm.Serial,
+	          	Number = cm.Number
+	          })
 			.ToListAsync();
 
 			return result;
