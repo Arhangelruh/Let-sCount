@@ -86,23 +86,24 @@ namespace LetusCountApplication.Application.Services
 		{
 			var result = await _db.CashMachines
 	         .AsNoTracking()
-	         .Join(
-		           _db.CashCashMachines
-			       .GroupBy(x => x.CashMachineId)
-			       .Select(g => g.OrderByDescending(x => x.StartWorking).First()),
-		           cm => cm.Id,
-		           ccm => ccm.CashMachineId,
-		           (cm, ccm) => new CashMachineDto
-		           {
-			          Id = cm.Id,
-			          Serial = cm.Serial,
-			          Number = cm.Number,
-			          CashId = cm.Id,
-			          StartWorking = ccm.StartWorking,
-			          EndWorking = ccm.EndWorking
-		           }
-	               )
-	         .ToListAsync();
+			 .Where(cm=>cm!.CashCashMachine.Any() || cm.CashCashMachine.All(ccm => ccm.EndWorking != null))
+			  .Select(cm => new
+			  {
+				  Machine = cm,
+				  LastRecord = cm.CashCashMachine
+			.OrderByDescending(ccm => ccm.StartWorking)
+			.FirstOrDefault()
+			  })
+           	.Select(x => new CashMachineDto
+	        {
+	        	Id = x.Machine.Id,
+		        Serial = x.Machine.Serial,
+		        Number = x.Machine.Number,
+	        	CashId = x.LastRecord != null ? x.LastRecord.CashId : 0,
+	        	StartWorking = x.LastRecord != null ? x.LastRecord.StartWorking : null,
+	        	EndWorking = x.LastRecord != null ? x.LastRecord.EndWorking : null
+	        })
+	        .ToListAsync();
 
 			return result;
 		}
