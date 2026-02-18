@@ -40,7 +40,6 @@ namespace LetusCountApplication.Application.Services
 
 			if (prevousRelative != null)
 			{
-
 				if (prevousRelative.EndWorking == null)
 				{
 					prevousRelative.EndWorking = time;
@@ -60,8 +59,35 @@ namespace LetusCountApplication.Application.Services
 		public async Task ChangeCashStatusAsync(int id)
 		{
 			var cash = await _db.Cashes.FirstOrDefaultAsync(c => c.Id == id);
+			
 			if (cash != null)
 			{
+				var lastConnection = await _db.CashCashMachines
+						.OrderByDescending(cm => cm.Id)
+						.FirstOrDefaultAsync(cm => cm.CashId == cash.Id);
+
+				if (lastConnection != null)
+				{
+					if (cash.WorkStatus)
+					{
+						if (lastConnection.EndWorking == null)
+						{
+							var time = DateTime.Now.ToUniversalTime();
+							lastConnection.EndWorking = time;
+						}						
+					}
+					else
+					{
+					  var lastConnectionforCashMachine = await _db.CashCashMachines
+							  .OrderByDescending(cm => cm.Id)
+							  .FirstOrDefaultAsync(cm => cm.CashMachineId == lastConnection.CashMachineId);
+
+						if (lastConnectionforCashMachine == lastConnection) {
+							lastConnection.EndWorking = null;
+						}
+
+					}
+				}
 				cash.WorkStatus = !cash.WorkStatus;
 				await _db.SaveChangesAsync();
 			}
@@ -86,6 +112,24 @@ namespace LetusCountApplication.Application.Services
 				return true;
 			}
 			return false;
+		}
+
+		public async Task<bool> CheckCashForDelitingAsync(CashDto cashDto)
+		{
+			ArgumentNullException.ThrowIfNull(cashDto);
+			
+			var checkRelative = await _db.CashCashMachines
+				.AsNoTracking()
+				.FirstOrDefaultAsync(cm => cm.CashId == cashDto.Id);
+
+			if (checkRelative != null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 
 		public async Task EditCashAsync(CashDto cashDto)

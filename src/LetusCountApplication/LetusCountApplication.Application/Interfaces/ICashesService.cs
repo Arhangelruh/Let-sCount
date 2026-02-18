@@ -18,6 +18,13 @@ namespace LetusCountApplication.Application.Interfaces
 		Task<bool> DeleteCashAsync(CashDto cashDto);
 
 		/// <summary>
+		/// Check cash if it can be deleted
+		/// </summary>
+		/// <param name="cashDto">Cash dto</param>
+		/// <returns>result</returns>
+		Task<bool> CheckCashForDelitingAsync(CashDto cashDto);
+
+		/// <summary>
 		/// Edit cash.
 		/// </summary>
 		/// <param name="cashDto">Cash dto model</param>

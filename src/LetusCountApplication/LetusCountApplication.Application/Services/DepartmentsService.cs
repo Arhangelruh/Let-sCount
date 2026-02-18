@@ -33,6 +33,13 @@ namespace LetusCountApplication.Application.Services
 				{
 					foreach(var cash in cashes)
 					{
+						var checkBeforeDeleting = await _cashesService.CheckCashForDelitingAsync(cash);
+						if(!checkBeforeDeleting)
+							return false;
+					}
+
+					foreach(var cash in cashes)
+					{
 						var result = await _cashesService.DeleteCashAsync(cash);
 						if(!result)
 							return false;
