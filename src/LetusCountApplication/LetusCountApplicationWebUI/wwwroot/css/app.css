@@ -47,6 +47,33 @@ filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.05));
   text-align: start;
 }
 
+.logo-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;  
+  background: linear-gradient(rgba(150, 150, 150, 0.5), rgba(150, 150, 150, 0.5)) bottom center / 80% 1px no-repeat;
+}
+
+.nav-menu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.nav-item{
+  margin-top: 20px;
+  width: 80%;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.nav-item:hover{
+   background: rgba(27, 89, 248, 0.1);
+}
+
 .container {
     width: 100%;
     margin: 0 auto;
