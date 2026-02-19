@@ -30,7 +30,7 @@ namespace LetusCountApplication.Application.Services
 		{
 			var banknotes = await _db.Banknotes
 				.AsNoTracking()
-				.Where(b => b.SerialNumber == serialNumber)
+				.Where(b => b.SerialNumber == serialNumber || b.SerialNumber.Contains(serialNumber))
 				.Select(b => new FullBanknoteDto
 				{
 					Id = b.Id,
