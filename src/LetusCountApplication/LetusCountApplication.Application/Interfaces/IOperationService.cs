@@ -23,5 +23,12 @@ namespace LetusCountApplication.Application.Interfaces
 		/// <param name="serialNumber">Cash machine serial number</param>
 		/// <returns></returns>
 		Task<int> OperationCountsAsync(DateTime begin, DateTime end, string serialNumber);
+
+		/// <summary>
+		/// Get information about operation by id.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		Task<OperationDto> GetOperationByIdAsync(int id);
 	}
 }

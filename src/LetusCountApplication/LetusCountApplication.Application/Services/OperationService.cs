@@ -72,5 +72,34 @@ namespace LetusCountApplication.Application.Services
 					&& o.EndTime <= end)
 			   .CountAsync();
 		}
+
+		public async Task<OperationDto> GetOperationByIdAsync(int id) {
+
+			var operation = await _db.Operations
+				.AsNoTracking()
+				.Where(o => o.Id == id)
+				.Select(o => new OperationDto
+				{
+					Id = o.Id,
+					MachineSerial = o.MachineSerial,
+					StartTime = o.StartTime,
+					EndTime = o.EndTime,
+					OperationUnits = o.OperationUnits.Select(ou => new OperationUnitDto
+					{
+						Id = ou.Id,
+						Currency = ou.Currency,
+						Banknotes = ou.Banknotes.Select(b => new BanknoteDto
+						{
+							Id = b.Id,
+							SerialNumber = b.SerialNumber,
+							DenomName = b.DenomName,
+							Value = b.Value
+						}).ToList()
+					}).ToList()
+				})
+				.FirstOrDefaultAsync();
+
+			return operation;
+		}
 	}
 }

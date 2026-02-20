@@ -9,6 +9,13 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <param name="serialNumber"></param>
 		/// <returns></returns>
-		Task<List<FullTransactionDTO>> SearchByBanknote(string serialNumber);
+		Task<List<FullTransactionDTO>> SearchByBanknoteAsync(string serialNumber);
+
+		/// <summary>
+		/// Get information about operation.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		Task<FullOperationInformationDto> GetOperationInformationAsync(int id);
 	}
 }
