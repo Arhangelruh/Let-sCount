@@ -32,7 +32,8 @@ namespace LetusCountService.Application.Services
 				var operationUnit = new OperationUnit
 				{
 					OperationId = newOperation.Id,
-					Currency = unit.Currency
+					Currency = unit.Currency,
+					TotalSum = unit.TotalSum
 				};
 
 				await _repositoryOperationUnit.AddAsync(operationUnit);

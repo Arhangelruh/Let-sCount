@@ -33,6 +33,7 @@ namespace LetusCountService.Infrastructure.Xml.Services
 				operationUnits.Add(new OperationUnit
 				{
 					Currency = unit.Currency,
+					TotalSum = unit.Sum.TotalSum,
 					Banknotes = banknotes
 				});
 			}

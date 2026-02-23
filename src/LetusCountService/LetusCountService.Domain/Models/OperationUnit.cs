@@ -18,6 +18,11 @@
 		public int OperationId { get; set; }
 
 		/// <summary>
+		/// Total summ for unit.
+		/// </summary>
+		public decimal TotalSum { get; set; }
+
+		/// <summary>
 		/// Navigate to Operation.
 		/// </summary>
 		public Operation Operation { get; set; }
