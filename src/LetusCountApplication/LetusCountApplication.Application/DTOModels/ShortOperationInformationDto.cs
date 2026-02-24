@@ -1,6 +1,6 @@
 ﻿namespace LetusCountApplication.Application.DTOModels
 {
-	public class FullOperationInformationDto
+	public class ShortOperationInformationDto
 	{
 		/// <summary>
 		/// Department information.
@@ -10,6 +10,6 @@
 		/// <summary>
 		/// Operation information.
 		/// </summary>
-		public OperationDto Operation { get; set; }
+		public TransactionOperationDto Operation { get; set; }
 	}
 }
