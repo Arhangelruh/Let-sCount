@@ -13,6 +13,11 @@
 		public required string Currency { get; set; }
 
 		/// <summary>
+		/// Total summ for unit.
+		/// </summary>
+		public decimal TotalSum { get; set; }
+
+		/// <summary>
 		/// Operation identifier.
 		/// </summary>
 		public int OperationId { get; set; }

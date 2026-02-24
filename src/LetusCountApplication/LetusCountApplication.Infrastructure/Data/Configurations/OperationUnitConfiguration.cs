@@ -22,6 +22,9 @@ namespace LetusCountApplication.Infrastructure.Data.Configurations
 				.IsRequired()
 				.HasMaxLength(FieldLengthsConstants.MaxLengthShort);
 
+			builder.Property(un => un.TotalSum)
+				.IsRequired();
+
 			builder.HasOne(operation => operation.Operation)
 			 .WithMany(unit => unit.OperationUnits)
 			 .HasForeignKey(operation => operation.OperationId)
