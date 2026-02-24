@@ -1,4 +1,6 @@
 ﻿using LetusCountApplication.Application.DTOModels;
+using LetusCountApplication.Application.QueryModels;
+using LetusCountApplication.Application.Services;
 
 namespace LetusCountApplication.Application.Interfaces
 {
@@ -17,5 +19,12 @@ namespace LetusCountApplication.Application.Interfaces
 		/// <param name="id"></param>
 		/// <returns></returns>
 		Task<FullOperationInformationDto> GetOperationInformationAsync(int id);
+
+		/// <summary>
+		/// Get paged information by department between two dates.
+		/// </summary>
+		/// <param name="query">query params</param>
+		/// <returns>Paged list ShortOperationInformationDto</returns>
+		Task<PagedResult<ShortOperationInformationDto>> SearchByDepartment(DepartmentOperationQuery query);
 	}
 }
