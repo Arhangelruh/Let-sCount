@@ -88,6 +88,7 @@ namespace LetusCountApplication.Application.Services
 					{
 						Id = ou.Id,
 						Currency = ou.Currency,
+						TotalSum = ou.TotalSum,
 						Banknotes = ou.Banknotes.Select(b => new BanknoteDto
 						{
 							Id = b.Id,

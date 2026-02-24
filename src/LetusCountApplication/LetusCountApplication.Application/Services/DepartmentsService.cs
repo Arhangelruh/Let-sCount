@@ -62,7 +62,7 @@ namespace LetusCountApplication.Application.Services
 					Name = dep.Name,
 					Address = dep.Address,
 					IsActive = dep.WorkStatus,
-					Cashes = dep.Cashes
+					Cashes = dep.Cashes					
 					.Select(c => new CashDto
 					{
 						Id = c.Id,
