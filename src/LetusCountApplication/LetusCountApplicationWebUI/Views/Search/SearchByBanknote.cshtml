@@ -1,0 +1,56 @@
+﻿@model List<BanknoteViewModel>
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="page-header">
+			<h4>Поиск по купюрам</h4>
+			<div class="searchbar">
+				<form class="searchform" method="get" asp-controller="Search" asp-action="SearchByBanknote">
+					<input type="text" name="serial" class="searchbar-input" placeholder="Поиск..." />
+					<button class="searchbar-botton" type="submit" title="Index">Поиск</button>							
+				</form>
+			</div>
+		</div>		
+		<div class="page-content">
+			@if (Model.Any())
+			{
+				<table class="table block-background">
+					<tr>
+						<th>Подразделение</th>
+						<th>Касса</th>
+						<th>Kisan</th>
+						<th>Валюта</th>
+						<th>Модификация</th>
+						<th>Номинал</th>
+						<th>Номер</th>
+						<th>Дата операции</th>
+						<th></th>
+					</tr>
+					@foreach(var banknote in Model)
+					{
+						<tr>
+							<td>@banknote.Department</td>
+							<td>@banknote.Cash</td>
+							<td>@banknote.MachineSerial</td>
+							<td>@banknote.Currency</td>
+							<td>@banknote.DenomName</td>
+							<td>@banknote.Value</td>
+							<td>@banknote.SerialNumber</td>
+							<td>@banknote.EndTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+							<td>
+								<a asp-controller="Operation" asp-action="Operation" asp-route-operationId="@banknote.OperationId">
+									<div class="table-loupe"><img title="Посмотреть" src="/images/Loupe.svg" /></div>
+								</a>
+							</td>
+						</tr>
+					}
+				</table>	
+			
+			}
+			else
+			{
+				<div class="nonfound-message block-background">Введите серийный номер купюры в строку поиска.</div>
+			}
+		</div>
+    </div>
+</div>

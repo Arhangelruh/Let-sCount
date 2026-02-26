@@ -24,25 +24,23 @@ namespace LetusCountApplicationWebUI.Controllers
 			var departments = await _departmentsService.GetAllDepartmentsAsync();
 			List<DepartmentViewModel> departmentViewModels = [];
 
-			if (departments.Count != 0)
+			if (departments.Count > 0)
 			{
 				foreach (var department in departments)
 				{
 					List<CashViewModel> cashViewModels = [];
-					if (department.Cashes.Count != 0)
+					if (department.Cashes.Count > 0)
 					{
 						foreach (var cash in department.Cashes)
-						{							
+						{
 							var cashMachine = await _cashMachinesService.GetConnectedToCashCashMachineAsync(cash.Id);
-							if(cashMachine != null) { 
-							}
 
 							cashViewModels.Add(new CashViewModel
 							{
 								Id = cash.Id,
 								Name = cash.Name,
 								IsActive = cash.IsActive,
-								CashMachine = cashMachine != null ? new CashMachineViewModel{ Id = cashMachine.Id, Serial = cashMachine.Serial, Number = cashMachine.Number } : null
+								CashMachine = cashMachine != null ? new CashMachineViewModel { Id = cashMachine.Id, Serial = cashMachine.Serial, Number = cashMachine.Number } : null
 							});
 						}
 					}
@@ -103,17 +101,21 @@ namespace LetusCountApplicationWebUI.Controllers
 			var department = await _departmentsService.GetDepartmentByIdAsync(departmentId);
 			if (department != null)
 			{
-				if (department.IsActive) { 
-				   var cashes = await _cashesService.GetCashesByDepartmentAsync(department.Id);
-					if (cashes != null) {
-						foreach (var cash in cashes) {
-							if (cash.IsActive) { 
-							   await _cashesService.ChangeCashStatusAsync(cash.Id);
+				if (department.IsActive)
+				{
+					var cashes = await _cashesService.GetCashesByDepartmentAsync(department.Id);
+					if (cashes != null)
+					{
+						foreach (var cash in cashes)
+						{
+							if (cash.IsActive)
+							{
+								await _cashesService.ChangeCashStatusAsync(cash.Id);
 							}
 						}
 					}
 				}
-				await _departmentsService.ChangeDepartmentStatusAsync(department.Id);				
+				await _departmentsService.ChangeDepartmentStatusAsync(department.Id);
 			}
 			return RedirectToAction("Departments");
 		}
@@ -141,6 +143,107 @@ namespace LetusCountApplicationWebUI.Controllers
 			ViewBag.ErrorMessage = "Подразделение не найдено.";
 			ViewBag.ErrorTitle = "Ошибка";
 			return View("~/Views/Error/Error.cshtml");
+		}
+
+		/// <summary>
+		/// Edit department view.
+		/// </summary>
+		/// <param name="departmentId"></param>
+		/// <returns></returns>
+		[HttpGet]
+		public async Task<IActionResult> EditDepartment(int departmentId)
+		{
+
+			var department = await _departmentsService.GetDepartmentByIdAsync(departmentId);
+			if (department != null)
+			{
+				var model = new DepartmentViewModel
+				{
+					Id = department.Id,
+					Name = department.Name,
+					Address = department.Address
+				};
+				return View(model);
+			}
+			else
+			{
+				ViewBag.ErrorMessage = "Депортамент не найден.";
+				ViewBag.ErrorTitle = "Ошибка";
+				return View("~/Views/Error/Error.cshtml");
+			}
+		}
+
+		/// <summary>
+		/// Edit department.
+		/// </summary>
+		/// <param name="model"></param>
+		/// <returns></returns>
+		[HttpPost]
+		public async Task<IActionResult> EditDepartment(DepartmentViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var department = await _departmentsService.GetDepartmentByIdAsync(model.Id);
+				if (department != null)
+				{
+					var departmentDto = new DepartmentDto
+					{
+						Id = department.Id,
+						Name = model.Name,
+						Address = model.Address,
+						IsActive = department.IsActive
+					};
+
+					await _departmentsService.UpdateDepartmentAsync(departmentDto);
+
+					return RedirectToAction("Departments");
+				}
+				else
+				{
+					ViewBag.ErrorMessage = "Депортамент не найден.";
+					ViewBag.ErrorTitle = "Ошибка";
+					return View("~/Views/Error/Error.cshtml");
+				}
+			}
+			return View(model);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetActiveDepartments()
+		{
+			var departments = await _departmentsService.GetAllActiveDepartmentsAsync();
+			List<DepartmentViewModel> departmentViewModels = [];
+
+			if (departments.Count > 0)
+			{
+				foreach (var department in departments)
+				{
+					List<CashViewModel> cashViewModels = [];
+					if (department.Cashes.Count > 0)
+					{
+						foreach (var cash in department.Cashes)
+						{						
+							cashViewModels.Add(new CashViewModel
+							{
+								Id = cash.Id,
+								Name = cash.Name,
+								IsActive = cash.IsActive,								
+							});
+						}
+					}
+
+					departmentViewModels.Add(new DepartmentViewModel
+					{
+						Id = department.Id,
+						Name = department.Name,
+						IsActive = department.IsActive,
+						Address = department.Address,
+						Cashes = cashViewModels
+					});
+				}
+			}
+
+			return View(departmentViewModels.OrderBy(d => d.Id).ToList());
 		}
 	}
 }

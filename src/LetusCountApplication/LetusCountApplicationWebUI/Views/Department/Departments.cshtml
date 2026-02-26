@@ -22,6 +22,9 @@
 									<label for="slide-@department.Id"></label>
 									</form>								
 								</div>
+								<a asp-controller="Department" asp-action="EditDepartment" asp-route-departmentId="@department.Id">
+									<div class="configuration-table-action  actions-width"><img title="Изменить" src="/images/Edit.svg" /></div>
+								</a>
 								<div class="delete-box">
 								  <a asp-controller="Department" asp-action="DeleteDepartment" asp-route-departmentId="@department.Id">
 									<div class="configuration-table-action"><img title="Удалить" src="/images/Delete.svg" /></div>
@@ -39,16 +42,16 @@
 											<div class="cash-extra-info"> @(cash.IsActive ? "Активна" : "Закрыта")</div>
 											<div class="cash-extra-info">@(cash.CashMachine != null ? cash.CashMachine.Serial : "Не настроен")</div>													
 											<div class="cash-actions">
-														<form class="slider-form cash-actions-width" method="post" asp-controller="Cash" asp-action="ChangeStatus">
+												<form class="slider-form actions-width" method="post" asp-controller="Cash" asp-action="ChangeStatus">
 													<input type="hidden" name="cashId" value="@cash.Id" />
 													<input type="checkbox" class="slider" id="cash-slide-@cash.Id" checked="@cash.IsActive" name="isActive" onchange="this.form.submit()" />
 													<label for="cash-slide-@cash.Id"></label>
 												</form>
-														<a asp-controller="Cash" asp-action="EditCash" asp-route-cashId="@cash.Id">
-															<div class="configuration-table-action  cash-actions-width"><img title="Изменить" src="/images/Edit.svg" /></div>
+												<a asp-controller="Cash" asp-action="EditCash" asp-route-cashId="@cash.Id">
+													<div class="configuration-table-action  actions-width"><img title="Изменить" src="/images/Edit.svg" /></div>
 												</a>
-														<a asp-controller="Cash" asp-action="DeleteCash" asp-route-cashId="@cash.Id">
-															<div class="configuration-table-action cash-actions-width"><img title="Удалить" src="/images/Delete.svg" /></div>
+												<a asp-controller="Cash" asp-action="DeleteCash" asp-route-cashId="@cash.Id">
+													<div class="configuration-table-action actions-width"><img title="Удалить" src="/images/Delete.svg" /></div>
 												</a>
 											</div>
 										 </div>									     									

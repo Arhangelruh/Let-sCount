@@ -1,0 +1,64 @@
+﻿@model List<DepartmentViewModel>
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="page-header">
+			<h4>Отчет по подразделениям</h4>
+		</div>
+		<div class="page-body">
+			@if (Model.Any())
+			{
+				<div class="departments-list">
+					@foreach (var department in Model)
+					{
+						<details class="department-details">
+							<summary class="department-summary block-background">
+								<div class="department-data">@department.Name</div>
+								<div class="department-data">@department.Address</div>	
+								<a class="searchbox" asp-controller="Search" asp-action="SearchByDepartment" asp-route-DepartmentId="@department.Id">
+									<div class="search-button block-background">
+										<img class="search-button-picture" src="~/images/Loupe.svg" />
+									</div>
+								</a>								
+							</summary>
+							<div class="cash-blok">
+								<div class="cash-list">
+									<div class="cash-info">
+										@if (department.Cashes.Count != 0)
+										{
+											@foreach (var cash in department.Cashes)
+											{
+												<div class="cash block-background">
+													<div class="cash-name">@cash.Name</div>		
+													<div class="cash-extra-info"> @(cash.IsActive ? "Активна" : "Закрыта")</div>																										
+													<a class="searchbox" asp-controller="Search" asp-action="SearchByCash" asp-route-CashId="@cash.Id">
+														<div class="search-button block-background">
+															<img class="search-button-picture" src="~/images/Loupe.svg" />
+														</div>
+													</a>
+												</div>												
+											}
+										}
+										else
+										{
+											<p>В данном подразделении не настроено ни одной кассы.</p>
+										}
+									</div>
+								</div>								
+							</div>
+						</details>
+					}
+				</div>
+			}
+			else
+			{
+				<div class="nonfound-message block-background">Не найдено активных точек.</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+@section css {
+	<link href="~/css/department.css" rel="stylesheet" asp-append-version="true" />
+}

@@ -7,6 +7,7 @@
 	   @RenderSection("css", false)
 	</head>
 	<body>		
+	<div class="layout">
     	<sidebar>
 			<div class="logo-bar">
 		       <a class="logo" asp-controller="Home" asp-action="Index">
@@ -18,13 +19,17 @@
 				<img class="nav-item-ico" src="/images/Banknote.svg" />
 				<div class="nav-item-text">Купюры</div>
 			</a>
-				<div class="nav-item">Поиск по номеру</div>
-			    <div class="nav-item">Список подразделений</div>
+			<a class="nav-item" asp-controller="Department" asp-action="GetActiveDepartments">
+				<img class="nav-item-ico" src="/images/Department.svg" />
+				<div class="nav-item-text">Подразделения</div>
+			</a>				
 			</div>
 		</sidebar>	
 
-	<div class="container">		
-		@RenderBody()
+	    <div class="container">		
+		   @RenderBody()	
+		   <div class="body-footer"></div>
+	    </div>
 	</div>
 	@RenderSection("js", false)	
 	</body>

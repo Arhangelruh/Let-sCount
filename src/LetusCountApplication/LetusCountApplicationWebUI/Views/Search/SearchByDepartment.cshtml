@@ -1,0 +1,135 @@
+﻿@model DepartmentOperationsViewModel
+
+@{
+	var routeValues = new Dictionary<string, string>
+	{
+		["DepartmentId"] = Model.DepartmentId.ToString(),
+		["DateTimeFrom"] = Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm"),
+		["DateTimeTo"] = Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm"),
+		["SortField"] = Model.SortField,
+		["SortDirection"] = Model.SortDirection,
+		["PageSize"] = Model.PageSize.ToString()
+	};
+}
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="page-header">
+			<h4>Отчет по @Model.Department</h4>
+		</div>
+		<div class="page-body">
+			<div class="filterbar">
+				<form class="filter-data" method="get" asp-controller="Search" asp-action="SearchByDepartment">
+					<input type="hidden" asp-for="DepartmentId" />
+					<input type="hidden" asp-for="SortField" />
+					<input type="hidden" asp-for="SortDirection" />
+					<input class="filter-input" asp-for="DateTimeFrom" type="datetime-local" value="@(Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm"))" />
+					<input class="filter-input" asp-for="DateTimeTo" type="datetime-local" value="@(Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm"))" />
+					<button class="filter-botton" type="submit">Поиск</button>
+			   </form>		
+			</div>			
+
+			@if (Model.Operations.Items.Any())
+			{
+				<table class="table block-background">
+					<tr>
+						<th>
+							<a class="table-link @(Model.SortField == "CashId" ? "active-sort" : "")"
+							    asp-controller="Search"
+							    asp-action="SearchByDepartment"
+								asp-route-SortField="CashId"
+							    asp-route-SortDirection="@Model.GetNextSortDirection("CashId")"
+								asp-route-DepartmentId="@Model.DepartmentId"
+							   asp-route-DateTimeFrom="@Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm")"
+							   asp-route-DateTimeTo="@Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm")">
+							    <div>Касса</div>
+						        <img class="table-link-image" src="/images/UpDown.svg" />
+						</a>
+						</th>
+						<th>
+							<a class="table-link @(Model.SortField == "Currency" ? "active-sort" : "")"
+							   asp-controller="Search"
+							   asp-action="SearchByDepartment"
+							   asp-route-SortField="Currency"
+							   asp-route-SortDirection="@Model.GetNextSortDirection("Currency")"
+							   asp-route-DepartmentId="@Model.DepartmentId"
+							   asp-route-DateTimeFrom="@Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm")"
+							   asp-route-DateTimeTo="@Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm")">
+								<div>Валюта</div>
+								<img class="table-link-image" src="/images/UpDown.svg" />
+						   </a>						    
+						</th>
+						<th>Kisan</th>
+						<th>
+							<a class="table-link @(Model.SortField == "TotalSum" ? "active-sort" : "")"
+							   asp-controller="Search"
+							   asp-action="SearchByDepartment"
+							   asp-route-SortField="TotalSum"
+							   asp-route-SortDirection="@Model.GetNextSortDirection("TotalSum")"
+							   asp-route-DepartmentId="@Model.DepartmentId"
+							   asp-route-DateTimeFrom="@Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm")"
+							   asp-route-DateTimeTo="@Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm")">
+								<div>Сумма</div>
+								<img class="table-link-image" src="/images/UpDown.svg" />
+							</a>
+						</th>
+						<th>
+							<a class="table-link @(Model.SortField == "EndTime" ? "active-sort" : "")"
+							   asp-controller="Search"
+							   asp-action="SearchByDepartment"
+							   asp-route-SortField="EndTime"
+							   asp-route-SortDirection="@Model.GetNextSortDirection("EndTime")"
+							   asp-route-DepartmentId="@Model.DepartmentId"
+							   asp-route-DateTimeFrom="@Model.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm")"
+							   asp-route-DateTimeTo="@Model.DateTimeTo.ToString("yyyy-MM-ddTHH:mm")">
+								<div>Время</div>
+								<img class="table-link-image" src="/images/UpDown.svg" />
+							</a>						
+						</th>						
+						<th></th>
+					</tr>
+					@foreach(var row in Model.Operations.Items)
+					{
+						<tr>
+							<td>@row.Cash</td>
+							<td>@row.OperationUnits[0].Currency</td>
+							<td>@row.MachineSerial</td>
+							<td>@row.OperationUnits[0].Sum</td>							
+							<td>@row.EndTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+							<td>
+								<a asp-controller="Operation" asp-action="Operation" asp-route-operationId="@row.OperationUnits[0].OperationId">
+									<div class="table-loupe"><img title="Посмотреть" src="/images/Loupe.svg" /></div>
+								</a>
+							</td>
+						</tr>
+					}
+				</table>	
+				@if (Model.Operations.TotalPages > 1)
+				{
+					<div class="pages-actions block-background">
+						@if (Model.Operations.HasPreviousPage)
+						{
+							<a class="page-action-link" asp-action="SearchByDepartment"
+							asp-all-route-data="routeValues"
+							asp-route-page="@(Model.Operations.Page - 1)">
+								<img class="page-action-img" title="Previous" src="/images/Left.svg" />
+							</a>
+						}
+						@if (Model.Operations.HasNextPage)
+						{
+							<a class="page-action-link" asp-action="SearchByDepartment"
+							asp-all-route-data="routeValues"
+							asp-route-page="@(Model.Operations.Page + 1)">
+								<img class="page-action-img" title="Next" src="/images/Right.svg" />
+							</a>
+						}
+					</div>
+				}
+			}
+			else
+			{
+				<div class="nonfound-message block-background">Данных не найдено.</div>
+			}
+		</div>
+	</div>
+</div>
