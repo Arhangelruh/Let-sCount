@@ -188,7 +188,73 @@ namespace LetusCountApplication.Application.Services
 				.ToListAsync();
 
 			return new PagedResult<ShortOperationInformationDto>(items, totalCount, query.Page, query.PageSize);
+		}
 
+		public async Task<PagedResult<CashTransactionInformationDto>> SearchByCash(CashOperationQuery query)
+		{
+			var baseQuery =
+			from ou in _db.OperationUnits
+			join op in _db.Operations
+				on ou.OperationId equals op.Id
+			join cm in _db.CashMachines
+				on op.MachineSerial equals cm.Serial
+			join ccm in _db.CashCashMachines
+				on cm.Id equals ccm.CashMachineId
+			join cash in _db.Cashes
+				on ccm.CashId equals cash.Id			
+			where cash.Id == query.CashId
+				  && op.EndTime >= query.DateFrom
+				  && op.EndTime <= query.DateTo
+				  && op.StartTime >= ccm.StartWorking
+				  && (ccm.EndWorking == null || op.StartTime <= ccm.EndWorking)
+			select new CashTransactionInformationDto
+			{
+				Cash = new CashDto
+				{
+					Id = cash.Id,
+					Name = cash.Name,					
+					DepartmentId = cash.DepartmentId,
+					IsActive = cash.WorkStatus					
+				},
+				Operation = new TransactionOperationDto
+				{
+					Id = op.Id,
+					MachineSerial = op.MachineSerial,
+					StartTime = op.StartTime,
+					EndTime = op.EndTime,
+					OperationUnit = new OperationUnitDto
+					{
+						Id = ou.Id,
+						Currency = ou.Currency,
+						TotalSum = ou.TotalSum,
+						Banknotes = new List<BanknoteDto>()
+					}
+				}
+			};
+
+			baseQuery = query.SortField switch
+			{				
+				"Currency" => query.SortDirection == "asc"
+					? baseQuery.OrderBy(x => x.Operation.OperationUnit.Currency)
+					: baseQuery.OrderByDescending(x => x.Operation.OperationUnit.Currency),
+
+				"TotalSum" => query.SortDirection == "asc"
+					? baseQuery.OrderBy(x => x.Operation.OperationUnit.TotalSum)
+					: baseQuery.OrderByDescending(x => x.Operation.OperationUnit.TotalSum),
+
+				_ => query.SortDirection == "asc"
+					? baseQuery.OrderBy(x => x.Operation.EndTime)
+					: baseQuery.OrderByDescending(x => x.Operation.EndTime)
+			};
+
+			var totalCount = await baseQuery.CountAsync();
+
+			var items = await baseQuery
+				.Skip((query.Page - 1) * query.PageSize)
+				.Take(query.PageSize)
+				.ToListAsync();
+
+			return new PagedResult<CashTransactionInformationDto>(items, totalCount, query.Page, query.PageSize);
 		}
 	}
 }

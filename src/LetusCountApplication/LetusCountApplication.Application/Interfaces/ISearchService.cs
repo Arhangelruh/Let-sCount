@@ -26,5 +26,12 @@ namespace LetusCountApplication.Application.Interfaces
 		/// <param name="query">query params</param>
 		/// <returns>Paged list ShortOperationInformationDto</returns>
 		Task<PagedResult<ShortOperationInformationDto>> SearchByDepartment(DepartmentOperationQuery query);
+
+		/// <summary>
+		/// Get paged information by cash between two dates.
+		/// </summary>
+		/// <param name="query"></param>
+		/// <returns></returns>
+		Task<PagedResult<CashTransactionInformationDto>> SearchByCash(CashOperationQuery query);
 	}
 }
