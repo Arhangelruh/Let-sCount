@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<CashMachineViewModel>
 
+@section NavExtra {
+	<a class="nav-item" asp-controller="Configuration" asp-action="Configuration">
+		<img class="nav-item-ico" src="/images/Settings.svg" />
+		<div class="nav-item-text">К настройкам</div>
+	</a>
+}
 
 <div class="wrapper">
 	<div class="page-body">

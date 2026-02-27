@@ -3,7 +3,7 @@
 	   <meta name="viewport" content="width=device-width" />
 	   <title>@ViewBag.Title</title>
 	   <link href="~/css/app.css" rel="stylesheet" asp-append-version="true" />
-	   <link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
+	   <link rel="icon" type="image/x-icon" href="~/images/favicon.png">
 	   @RenderSection("css", false)
 	</head>
 	<body>		
@@ -22,7 +22,8 @@
 			<a class="nav-item" asp-controller="Department" asp-action="GetActiveDepartments">
 				<img class="nav-item-ico" src="/images/Department.svg" />
 				<div class="nav-item-text">Подразделения</div>
-			</a>				
+			</a>	
+				@RenderSection("NavExtra", false)
 			</div>
 		</sidebar>	
 
