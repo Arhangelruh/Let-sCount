@@ -39,7 +39,8 @@ namespace LetusCountService.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Currency = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
-                    OperationId = table.Column<int>(type: "integer", nullable: false)
+                    OperationId = table.Column<int>(type: "integer", nullable: false),
+                    TotalSum = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,7 +59,7 @@ namespace LetusCountService.Infrastructure.Migrations
                 schema: "opr",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DenomName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
                     Value = table.Column<int>(type: "integer", maxLength: 32, nullable: false),
