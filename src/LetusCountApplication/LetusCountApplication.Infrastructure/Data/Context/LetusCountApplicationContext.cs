@@ -2,12 +2,14 @@
 using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure.Data.Configurations;
 using LetusCountApplication.Infrastructure.Data.Constants;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LetusCountApplication.Infrastructure.Data.Context
 {
-	public class LetusCountApplicationContext(DbContextOptions<LetusCountApplicationContext> options) : DbContext(options), IApplicationDbContext
+	public class LetusCountApplicationContext(DbContextOptions<LetusCountApplicationContext> options) : IdentityDbContext<User>(options), IApplicationDbContext
 	{
+
 		/// <summary>
 		/// Departments.
 		/// </summary>
@@ -43,6 +45,11 @@ namespace LetusCountApplication.Infrastructure.Data.Context
 		/// </summary>
 		public DbSet<Banknote> Banknotes { get; set; } = null!;
 
+		/// <summary>
+		/// Profiles.
+		/// </summary>
+		public DbSet<Profile> Profiles { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
@@ -50,6 +57,7 @@ namespace LetusCountApplication.Infrastructure.Data.Context
 			modelBuilder.ApplyConfiguration(new CashConfiguration());
 			modelBuilder.ApplyConfiguration(new CashMachineConfiguration());
 			modelBuilder.ApplyConfiguration(new CashCashMachineConfiguration());
+			modelBuilder.ApplyConfiguration(new ProfileConfiguration());
 
 			modelBuilder.ApplyConfiguration(new OperationConfiguration());
 			modelBuilder.Entity<Operation>()

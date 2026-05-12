@@ -14,6 +14,7 @@ public static class DependencyInjection
 		services.AddScoped<IBanknotesService, BanknotesService>();
 		services.AddScoped<IOperationService, OperationService>();
 		services.AddScoped<ISearchService, SearchService>();
+		services.AddScoped<IProfileService, ProfileService>();
 
 		return services;
 	}

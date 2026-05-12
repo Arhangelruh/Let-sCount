@@ -37,5 +37,10 @@
 		/// Operation units.
 		/// </summary>
 		public const string OperationUnits = nameof(OperationUnits);
+
+		/// <summary>
+		/// Profiles.
+		/// </summary>
+		public const string Profiles = nameof(Profiles);
 	}
 }

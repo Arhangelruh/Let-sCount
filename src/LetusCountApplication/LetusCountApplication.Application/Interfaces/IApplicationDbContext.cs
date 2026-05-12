@@ -40,6 +40,10 @@ public interface IApplicationDbContext
 	/// </summary>
 	DbSet<Banknote> Banknotes { get; }
 
+	/// <summary>
+	/// Profile.
+	/// </summary>
+	DbSet<Profile> Profiles { get; }
 
 	Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

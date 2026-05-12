@@ -11,5 +11,10 @@
 		/// Operations.
 		/// </summary>
 		public const string Operations = "opr";
+
+		/// <summary>
+		/// Users.
+		/// </summary>
+		public const string Users = "usr";
 	}
 }
