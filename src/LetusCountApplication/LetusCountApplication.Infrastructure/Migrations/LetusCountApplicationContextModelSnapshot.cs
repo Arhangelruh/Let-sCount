@@ -17,7 +17,7 @@ namespace LetusCountApplication.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.7")
+                .HasAnnotation("ProductVersion", "10.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -217,6 +217,38 @@ namespace LetusCountApplication.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LetusCountApplication.Domain.Models.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Profiles", "usr");
+                });
+
             modelBuilder.Entity("LetusCountApplication.Domain.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -279,40 +311,6 @@ namespace LetusCountApplication.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("LetusCountApplication.Domain.Profile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Profiles", "usr");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -499,11 +497,11 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     b.Navigation("Operation");
                 });
 
-            modelBuilder.Entity("LetusCountApplication.Domain.Profile", b =>
+            modelBuilder.Entity("LetusCountApplication.Domain.Models.Profile", b =>
                 {
                     b.HasOne("LetusCountApplication.Domain.Models.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("LetusCountApplication.Domain.Profile", "UserId")
+                        .HasForeignKey("LetusCountApplication.Domain.Models.Profile", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

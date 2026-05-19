@@ -202,8 +202,8 @@ namespace LetusCountApplication.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    LastName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     MiddleName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
