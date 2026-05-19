@@ -1,5 +1,7 @@
 ﻿using LetusCountApplication.Application.Interfaces;
+using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure.Data.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,10 @@ public static class DependencyInjection
 
 		services.AddScoped<IApplicationDbContext>(sp =>
 			sp.GetRequiredService<LetusCountApplicationContext>());
+
+		services.AddIdentity<User, IdentityRole>()
+				.AddEntityFrameworkStores<LetusCountApplicationContext>()
+				.AddDefaultTokenProviders();
 
 		return services;
 	}
