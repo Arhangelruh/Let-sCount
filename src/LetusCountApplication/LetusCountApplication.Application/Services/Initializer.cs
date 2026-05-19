@@ -1,4 +1,5 @@
-﻿using LetusCountApplication.Application.Interfaces;
+﻿using LetusCountApplication.Application.DTOModels;
+using LetusCountApplication.Application.Interfaces;
 using LetusCountApplication.Domain.Constants;
 using LetusCountApplication.Domain.Models;
 using Microsoft.AspNetCore.Identity;
@@ -33,7 +34,8 @@ namespace LetusCountApplication.Application.Services
 
 			var checkAdmin = await userManager.FindByNameAsync(firstAdminLogin);
 
-			if (checkAdmin == null) {
+			if (checkAdmin == null)
+			{
 
 				var admin = new User { UserName = firstAdminLogin };
 
@@ -41,10 +43,10 @@ namespace LetusCountApplication.Application.Services
 				var profileService = services.GetRequiredService<IProfileService>();
 				if (result.Succeeded)
 				{
-					await userManager.AddToRoleAsync(admin,Roles.Admin);
-					await profileService.AddProfileAsync(new Profile { UserId = admin.Id });
+					await userManager.AddToRoleAsync(admin, Roles.Admin);
+					await profileService.AddProfileAsync(new ProfileDto { UserId = admin.Id });
 				}
-			}			
+			}
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using LetusCountApplication.Application.DTOModels;
-using LetusCountApplication.Domain.Models;
 
 namespace LetusCountApplication.Application.Interfaces
 {
@@ -13,7 +12,7 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <param name="profile">profile model</param>
 		/// <returns></returns>
-		Task AddProfileAsync(Profile profile);
+		Task AddProfileAsync(ProfileDto profile);
 
 		/// <summary>
 		/// Edit profile.
@@ -32,6 +31,40 @@ namespace LetusCountApplication.Application.Interfaces
 		/// </summary>
 		/// <param name="profileId">profile id</param>
 		/// <returns>profiledto</returns>
-		Task<ProfileDto> GetProfileById(int profileId);
+		Task<ProfileDto> GetProfileByIdAsync(int profileId);
+
+		/// <summary>
+		/// Get all profiles.
+		/// </summary>
+		/// <returns>List of profiles</returns>
+		Task<List<ProfileDto>> GetProfilesAsync();
+
+		/// <summary>
+		/// Lock user.
+		/// </summary>
+		/// <param name="profileId"></param>
+		/// <returns>Bool result</returns>
+		Task<bool> LockAsync(int profileId);
+
+		/// <summary>
+		/// Unlock.
+		/// </summary>
+		/// <param name="profileId"></param>
+		/// <returns>Bool result</returns>
+		Task<bool> UnLockAsync(int profileId);
+
+		/// <summary>
+		/// Delete user.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Bool result</returns>
+		Task<bool> DeleteUserAsync(int id);
+
+		/// <summary>
+		/// Edit user.
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
+		Task EditUserAsync(UserDto user);
 	}
 }
