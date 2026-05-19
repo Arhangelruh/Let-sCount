@@ -59,7 +59,7 @@ namespace LetusCountApplication.Application.Services
 		public async Task ChangeCashStatusAsync(int id)
 		{
 			var cash = await _db.Cashes.FirstOrDefaultAsync(c => c.Id == id);
-			
+
 			if (cash != null)
 			{
 				var lastConnection = await _db.CashCashMachines
@@ -74,15 +74,16 @@ namespace LetusCountApplication.Application.Services
 						{
 							var time = DateTime.Now.ToUniversalTime();
 							lastConnection.EndWorking = time;
-						}						
+						}
 					}
 					else
 					{
-					  var lastConnectionforCashMachine = await _db.CashCashMachines
-							  .OrderByDescending(cm => cm.Id)
-							  .FirstOrDefaultAsync(cm => cm.CashMachineId == lastConnection.CashMachineId);
+						var lastConnectionforCashMachine = await _db.CashCashMachines
+								.OrderByDescending(cm => cm.Id)
+								.FirstOrDefaultAsync(cm => cm.CashMachineId == lastConnection.CashMachineId);
 
-						if (lastConnectionforCashMachine == lastConnection) {
+						if (lastConnectionforCashMachine == lastConnection)
+						{
 							lastConnection.EndWorking = null;
 						}
 
@@ -117,7 +118,7 @@ namespace LetusCountApplication.Application.Services
 		public async Task<bool> CheckCashForDelitingAsync(CashDto cashDto)
 		{
 			ArgumentNullException.ThrowIfNull(cashDto);
-			
+
 			var checkRelative = await _db.CashCashMachines
 				.AsNoTracking()
 				.FirstOrDefaultAsync(cm => cm.CashId == cashDto.Id);
@@ -158,7 +159,7 @@ namespace LetusCountApplication.Application.Services
 					IsActive = c.WorkStatus
 				})
 				.FirstOrDefaultAsync();
-			
+
 			return cash;
 		}
 
@@ -167,12 +168,12 @@ namespace LetusCountApplication.Application.Services
 			var cashes = await _db.Cashes
 				.AsNoTracking()
 				.Where(c => c.DepartmentId == id)
-				.Select(c=> new CashDto
+				.Select(c => new CashDto
 				{
 					Id = c.Id,
 					Name = c.Name,
 					DepartmentId = c.DepartmentId,
-					IsActive= c.WorkStatus
+					IsActive = c.WorkStatus
 				})
 				.ToListAsync();
 

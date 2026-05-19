@@ -25,23 +25,24 @@ namespace LetusCountApplication.Application.Services
 		}
 
 		public async Task<bool> DeleteDepartmentAsync(int departmentId)
-		{			
-			var department = _db.Departments.FirstOrDefault(dep=>dep.Id == departmentId);
-			if (department != null) {
+		{
+			var department = _db.Departments.FirstOrDefault(dep => dep.Id == departmentId);
+			if (department != null)
+			{
 				var cashes = await _cashesService.GetCashesByDepartmentAsync(departmentId);
 				if (cashes.Count > 0)
 				{
-					foreach(var cash in cashes)
+					foreach (var cash in cashes)
 					{
 						var checkBeforeDeleting = await _cashesService.CheckCashForDelitingAsync(cash);
-						if(!checkBeforeDeleting)
+						if (!checkBeforeDeleting)
 							return false;
 					}
 
-					foreach(var cash in cashes)
+					foreach (var cash in cashes)
 					{
 						var result = await _cashesService.DeleteCashAsync(cash);
-						if(!result)
+						if (!result)
 							return false;
 					}
 				}
@@ -56,13 +57,14 @@ namespace LetusCountApplication.Application.Services
 		{
 			var departments = await _db.Departments
 				.AsNoTracking()
-				.Where(dep=>dep.WorkStatus == true)
-				.Select(dep=>new DepartmentDto { 
+				.Where(dep => dep.WorkStatus == true)
+				.Select(dep => new DepartmentDto
+				{
 					Id = dep.Id,
 					Name = dep.Name,
 					Address = dep.Address,
 					IsActive = dep.WorkStatus,
-					Cashes = dep.Cashes					
+					Cashes = dep.Cashes
 					.Select(c => new CashDto
 					{
 						Id = c.Id,
@@ -79,7 +81,7 @@ namespace LetusCountApplication.Application.Services
 		public async Task<List<DepartmentDto>> GetAllDepartmentsAsync()
 		{
 			var departments = await _db.Departments
-				.AsNoTracking()				
+				.AsNoTracking()
 				.Select(dep => new DepartmentDto
 				{
 					Id = dep.Id,
@@ -87,13 +89,14 @@ namespace LetusCountApplication.Application.Services
 					Address = dep.Address,
 					IsActive = dep.WorkStatus,
 					Cashes = dep.Cashes
-					.Select(c=> new CashDto { 
-					  Id=c.Id,
-					  Name=c.Name,
-					  DepartmentId=c.DepartmentId,
-					  IsActive=c.WorkStatus
+					.Select(c => new CashDto
+					{
+						Id = c.Id,
+						Name = c.Name,
+						DepartmentId = c.DepartmentId,
+						IsActive = c.WorkStatus
 					})
-					.ToList()					
+					.ToList()
 				})
 				.ToListAsync();
 
@@ -121,9 +124,9 @@ namespace LetusCountApplication.Application.Services
 			ArgumentNullException.ThrowIfNull(department);
 
 			var getDepartment = await _db.Departments
-				.FirstOrDefaultAsync(dep=>dep.Id == department.Id);
+				.FirstOrDefaultAsync(dep => dep.Id == department.Id);
 
-			if(getDepartment != null)
+			if (getDepartment != null)
 			{
 				getDepartment.Name = department.Name;
 				getDepartment.Address = department.Address;
