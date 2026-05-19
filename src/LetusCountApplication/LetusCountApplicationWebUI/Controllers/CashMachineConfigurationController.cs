@@ -1,6 +1,8 @@
 ﻿using LetusCountApplication.Application.DTOModels;
 using LetusCountApplication.Application.Interfaces;
+using LetusCountApplication.Domain.Constants;
 using LetusCountApplicationWebUI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetusCountApplicationWebUI.Controllers
@@ -14,6 +16,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> CashMachines()
 		{
 			var getAllCashMachines = await _cashMachinesService.GetAllCashMachinesAsync();
@@ -39,6 +42,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public IActionResult AddCashMachine()
 		{
 			return View();
@@ -50,6 +54,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="model"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> AddCashMachine(CashMachineViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -78,6 +83,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="machineId">Cash machine id</param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> DeleteCashMachine(int machineId)
 		{
 			var cashMachine = await _cashMachinesService.GetCashMachineByIdAsync(machineId);

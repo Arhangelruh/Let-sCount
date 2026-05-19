@@ -1,5 +1,6 @@
 ﻿using LetusCountApplication.Application.Interfaces;
 using LetusCountApplicationWebUI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetusCountApplicationWebUI.Controllers
@@ -14,6 +15,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="operationId"></param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> Operation(int operationId)
 		{
 
@@ -41,7 +43,7 @@ namespace LetusCountApplicationWebUI.Controllers
 									Value = banknote.Value
 								});
 							}
-						}						
+						}
 
 						operationUnits.Add(new OperationUnitViewModel
 						{

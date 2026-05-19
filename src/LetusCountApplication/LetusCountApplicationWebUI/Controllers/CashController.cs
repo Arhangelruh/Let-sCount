@@ -1,6 +1,8 @@
 ﻿using LetusCountApplication.Application.DTOModels;
 using LetusCountApplication.Application.Interfaces;
+using LetusCountApplication.Domain.Constants;
 using LetusCountApplicationWebUI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,6 +17,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// Add cash page.
 		/// </summary>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> AddCash(int departmentId)
 		{
 			var cashMachines = await _cashMachinesService.GetAllAvailableCashMachinesAsync();
@@ -38,6 +41,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> AddCash(CashViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> EditCash(int cashId)
 		{
 			var cash = await _cashesService.GetCashByIdAsync(cashId);
@@ -131,6 +136,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> EditCash(CashViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -193,6 +199,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <param name="cashId"></param>		
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<ActionResult> ChangeStatus(int cashId)
 		{
 			var cash = await _cashesService.GetCashByIdAsync(cashId);
@@ -209,6 +216,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="cashId">Cash id</param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<ActionResult> DeleteCash(int cashId)
 		{
 			var cash = await _cashesService.GetCashByIdAsync(cashId);

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LetusCountApplication.Domain.Constants;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LetusCountApplicationWebUI.Controllers
 {
@@ -9,6 +11,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public IActionResult Configuration()
 		{
 			return View();

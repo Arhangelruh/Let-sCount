@@ -1,0 +1,45 @@
+﻿@model EditUserViewModel
+
+<div class="wrapper">
+    <div class="page-body">
+        <div class="page-header">
+            <h4>Редактировать пользователя.</h4>
+        </div>
+        <div class="page-body">
+            <form class="form" method="post" asp-controller="Profile" asp-action="EditUser">
+                <input type="hidden" asp-for="UserId" />
+                <div class="forms-label">
+                    <input class="forms-field" asp-for="Login" placeholder="Логин" /><br />
+                    <span asp-validation-for="Login" class="text_error"></span>
+                </div>
+                <div class="forms-label">
+                    <input class="forms-field" asp-for="Password" placeholder="Пароль" /><br />
+                    <span asp-validation-for="Password" class="text_error"></span>
+                </div>
+                <div class="forms-label">
+                    <input class="forms-field" asp-for="LastName" placeholder="Фамилия" />
+                    <span asp-validation-for="LastName" class="text_error"></span>
+                </div>
+                <div class="forms-label">
+                    <input class="forms-field" asp-for="FirstName" placeholder="Имя" />
+                    <span asp-validation-for="FirstName" class="text_error"></span>
+                </div>
+                <div class="forms-label">
+                    <input class="forms-field" asp-for="MiddleName" placeholder="Отчество" />
+                    <span asp-validation-for="MiddleName" class="text_error"></span>
+                </div>
+                <div class="forms-label">
+                    <select id="priority" class="forms-field" asp-for="Role" asp-items="ViewBag.roles"></select>
+                    <span asp-validation-for="Role" class="text_error"></span>
+                </div>               
+                <div class="forms-label">
+                    <input class="button_classic" type="submit" value="Сохранить" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/user.css" rel="stylesheet" asp-append-version="true" />
+}

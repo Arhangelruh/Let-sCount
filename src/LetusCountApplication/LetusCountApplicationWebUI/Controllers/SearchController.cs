@@ -2,8 +2,8 @@
 using LetusCountApplication.Application.QueryModels;
 using LetusCountApplication.Application.Services;
 using LetusCountApplicationWebUI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LetusCountApplicationWebUI.Controllers
 {
@@ -23,6 +23,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="serial"></param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> SearchByBanknote(string serial)
 		{
 			List<BanknoteViewModel> banknotes = [];
@@ -57,6 +58,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> SearchByDepartment(DepartmentOperationsViewModel model)
 		{
 			var department = await _departmentsService.GetDepartmentByIdAsync(model.DepartmentId);
@@ -81,7 +83,7 @@ namespace LetusCountApplicationWebUI.Controllers
 				PageSize = model.PageSize <= 0 ? 100 : model.PageSize
 			};
 
-			var result = await _searchService.SearchByDepartment(query);			  
+			var result = await _searchService.SearchByDepartment(query);
 
 			List<OperationViewModel> operations = [];
 			foreach (var operation in result.Items)
@@ -108,11 +110,12 @@ namespace LetusCountApplicationWebUI.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> SearchByCash(CashOperationViewModel model)
 		{
 			var cash = await _cashesService.GetCashByIdAsync(model.CashId);
 
-			if(cash == null)
+			if (cash == null)
 			{
 				ViewBag.ErrorMessage = "Касса не найдена.";
 				ViewBag.ErrorTitle = "Ошибка";
@@ -133,7 +136,7 @@ namespace LetusCountApplicationWebUI.Controllers
 			};
 
 			var result = await _searchService.SearchByCash(query);
-			
+
 			model.Cash = cash.Name;
 			model.Department = department.Name;
 

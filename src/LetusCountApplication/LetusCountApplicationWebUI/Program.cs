@@ -1,7 +1,5 @@
 using LetusCountApplication.Application;
-using LetusCountApplication.Application.Interfaces;
 using LetusCountApplication.Application.Services;
-using LetusCountApplication.Domain.Models;
 using LetusCountApplication.Infrastructure;
 using NLog;
 using NLog.Web;
@@ -34,13 +32,14 @@ try
 	using (var scope = app.Services.CreateScope())
 	{
 		var services = scope.ServiceProvider;
-		await Initializer.InitializeAsync(services);				
+		await Initializer.InitializeAsync(services);
 	}
 
 	app.UseHttpsRedirection();
 
 	app.UseRouting();
 
+	app.UseAuthentication();
 	app.UseAuthorization();
 
 	app.MapControllerRoute(

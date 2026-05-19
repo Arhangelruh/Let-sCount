@@ -1,6 +1,8 @@
 ﻿using LetusCountApplication.Application.DTOModels;
 using LetusCountApplication.Application.Interfaces;
+using LetusCountApplication.Domain.Constants;
 using LetusCountApplicationWebUI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetusCountApplicationWebUI.Controllers
@@ -19,6 +21,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// Get all departmens with cashes.
 		/// </summary>		
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> Departments()
 		{
 			var departments = await _departmentsService.GetAllDepartmentsAsync();
@@ -64,6 +67,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public ActionResult AddDepartment()
 		{
 			return View();
@@ -75,6 +79,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="model"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<ActionResult> AddDepartment(DepartmentViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -96,6 +101,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// </summary>
 		/// <param name="departmentId"></param>		
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<ActionResult> ChangeStatus(int departmentId)
 		{
 			var department = await _departmentsService.GetDepartmentByIdAsync(departmentId);
@@ -126,6 +132,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="departmentId">Department id</param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<ActionResult> DeleteDepartment(int departmentId)
 		{
 			var department = await _departmentsService.GetDepartmentByIdAsync(departmentId);
@@ -151,6 +158,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="departmentId"></param>
 		/// <returns></returns>
 		[HttpGet]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> EditDepartment(int departmentId)
 		{
 
@@ -179,6 +187,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		/// <param name="model"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize(Roles = Roles.Admin)]
 		public async Task<IActionResult> EditDepartment(DepartmentViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -209,6 +218,7 @@ namespace LetusCountApplicationWebUI.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> GetActiveDepartments()
 		{
 			var departments = await _departmentsService.GetAllActiveDepartmentsAsync();
@@ -222,12 +232,12 @@ namespace LetusCountApplicationWebUI.Controllers
 					if (department.Cashes.Count > 0)
 					{
 						foreach (var cash in department.Cashes)
-						{						
+						{
 							cashViewModels.Add(new CashViewModel
 							{
 								Id = cash.Id,
 								Name = cash.Name,
-								IsActive = cash.IsActive,								
+								IsActive = cash.IsActive,
 							});
 						}
 					}
