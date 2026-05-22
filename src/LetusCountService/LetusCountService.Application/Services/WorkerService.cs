@@ -16,22 +16,20 @@ namespace LetusCountService.Application.Services
 			ArgumentNullException.ThrowIfNull(filePath);
 			try
 			{
-				await using var fs = File.OpenRead(filePath);
-				var operation = await _xmlParser.ParseAsync(fs, ct);
-
-				fs.Dispose();
-
+				var operation = await ParseAsync(filePath, ct);
+			
 				FileInfo fileInfo = new(filePath);
 				DateTime createData = fileInfo.CreationTime;
 
 				operation.StartTime = createData;
 				operation.EndTime = createData;
-
+				
 				await _saveOperationService.SaveOperationAsync(operation);
 
 				await _fileWorker.MoveFile(filePath);
+				
 			}
-			catch (DatabaseNotConfiguredException ex) 
+			catch (DatabaseNotConfiguredException ex)
 			{
 				throw new FilePersistenceException(filePath, ex);
 			}
@@ -55,6 +53,27 @@ namespace LetusCountService.Application.Services
 			{
 				throw new UnexpectedApplicationException(
 				$"Unexpected exception while {filePath} processing.", ex);
+			}
+		}
+
+		private async Task<Operation> ParseAsync(string filePath, CancellationToken ct)
+		{
+
+			const int maxAttempts = 5;
+			var delay = TimeSpan.FromSeconds(5);
+
+			for (int attempt = 1; ; attempt++)
+			{
+				try
+				{
+					await using var fs = File.OpenRead(filePath);
+
+					return await _xmlParser.ParseAsync(fs, ct);
+				}
+				catch when (attempt < maxAttempts)
+				{
+					await Task.Delay(delay, ct);
+				}
 			}
 		}
 	}
