@@ -1,0 +1,32 @@
+﻿@model DepartmentViewModel
+
+
+<div class="wrapper">
+    <div class="page-body">
+        <div class="configure-page-header">
+            <h4>Добавление подразделения</h4>
+        </div>
+        <div class="form-page-body">
+            <div class="text_error message">
+                @Html.ValidationMessage("Error")
+            </div>
+            <form class="form block-background" method="post" asp-controller="Department" asp-action="AddDepartment">
+                <div class="form-label">
+                    <input class="form-field" asp-for="Name" placeholder="Введите наименование подразделения." />
+                    <span asp-validation-for="Name" class="text_error"></span>
+                </div>
+                <div class="form-label">
+                    <input class="form-field" asp-for="Address" placeholder="Введите адрес подразделения." />
+                    <span asp-validation-for="Address" class="text_error"></span>
+                </div>
+                <div class="form-button">
+                    <input class="form-enter-button form-field" type="submit" value="Создать" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/configuration.css" rel="stylesheet" asp-append-version="true" />
+}

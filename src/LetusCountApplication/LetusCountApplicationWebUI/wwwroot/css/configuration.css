@@ -1,0 +1,344 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    min-width: 630px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/******************Configuration********************/
+
+.configure-link{
+    text-decoration: none;
+    text-align: center;   
+    color: black; 
+}
+
+.configure-link-block{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 60%;
+    min-width: 450px;
+    height: 400px;
+}
+
+.configure-button{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.configure-button-content{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.configure-button-img{
+    width: 30px;    
+    margin-right: 30px;
+}
+
+.configure-button-label{
+    font-weight: 600;      
+}
+
+.configure-page-header{
+    text-align: left;
+    width: 80%;
+    height: 50px;
+    border-bottom: groove;
+}
+
+.configure-page-body{
+    margin-top: 30px;    
+    width: 90%;
+    display: flex;
+}
+
+.configure-adding-button{
+   width: 200px;
+   height: 75vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-right: 0%;
+   margin-left: auto;
+   position: sticky;
+}
+
+.adding-button-picture{
+    width: 80px;
+}
+
+.page-body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/********************************************Forms********************************************/
+.form-page-body{
+    margin-top: 100px;
+}
+
+.form{
+    width: 500px;
+}
+
+.form-label{
+  margin-top: 20px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;  
+}
+
+.form-field{
+    height: 40px;
+    width: 60%;
+    border-radius: 20px;
+    border: 1px solid #a8aab0;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.form-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-enter-button{
+    cursor: pointer;
+}
+
+.form-enter-button:hover{
+    background-color: #a8aab0;
+}
+
+.info-field{
+    background-color: #a8aab0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/**********************************************Table*******************************************/
+
+.configuration-table{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: auto;
+}
+
+.configuration-table-head{
+    height: 30px;    
+}
+
+.configuration-table-row{
+    height: 30px;
+}
+
+.configuration-table-firstrow{
+    border-right: 1px solid #a8aab0;
+}
+
+.configuration-table-action{
+    display: flex;
+    justify-content: center;
+}
+
+/**********************************************Departments***************************************/
+.departments-list{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: auto;
+}
+
+.department-details{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.department-summary{
+    min-height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.department-data{
+    width: 40%;       
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.department-status{
+    width: 100px;
+}
+
+.slider-box{
+    width: 40px;
+}
+
+/****Slider****/
+.slider{
+    display: none;
+}
+
+.slider-form{
+    margin: auto;
+}
+
+.delete-box{
+    margin-right: 20px;
+}
+
+/**********************Cashes*********************/
+.cash-blok{
+    display: flex;
+    width: 90%;
+    min-height: 40px;
+    margin-right: 0%;
+    margin-left: auto;
+}
+
+.cash-list{
+    display: flex;
+    width: 90%;
+}
+
+.cash-adding{
+    width: 10%;
+}
+
+.configure-cash-button{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.add-cash-button-picture{
+    width: 40px;
+}
+
+.cash-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cash{
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+    align-items: center;
+}
+
+.cash-name{
+    width: 70%;
+}
+
+.cash-extra-info{
+    width: 150px;
+}
+
+.cash-actions{
+    display: flex;
+    width: 120px;
+}
+
+.cash-actions-width{
+    margin-left: 10px;
+}
+
+/**********Background:**********/
+.slider + label {
+  position: relative; display: block;
+  width: 40px; 
+  height: 20px;
+  cursor: pointer;
+  border-radius: 1.5em; 
+  background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #ddd;
+  box-shadow: 0 0.07em 0.1em -0.1em rgba(0, 0, 0, 0.4) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7);
+}
+
+.background-grey{
+    background-color: #a8aab0;
+}
+
+/********** Switch:*********/
+.slider + label::after {
+  position: absolute; content:'';
+  width: 13px; 
+  height: 13px;
+  top: 3px;
+  left: 8px;
+  border-radius: 50%;
+  transition: 250ms ease-in-out;
+  background: linear-gradient(#f5f5f5 10%, #eeeeee);
+  box-shadow: 0 0.1em 0.15em -0.05em rgba(255, 255, 255, 0.9) inset, 0 0.2em 0.2em -0.12em rgba(0, 0, 0, 0.5);
+}
+
+/********** Channel:*********/
+.slider + label::before {
+  position: absolute; content:'';
+  width: 25px;
+  height: 10px;
+  top: 5px;
+  left: 8px;
+  border-radius: 0.75em;
+  transition: 250ms ease-in-out;
+  background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.1)), #d0d0d0;
+  box-shadow:0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 0 0 0 0 rgba(68, 204, 102, 0.7) inset;
+}
+
+.slider:checked + label::before {
+  box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 rgba(68, 204, 102, 0.7) inset;
+}
+
+.slider:checked + label::after {
+	left: 20px;
+}
+
+
+
+@media (max-width: 768px) {
+.configure-page-body{
+    width: 99%;
+}
+
+.configure-adding-button{
+    width: 100px;
+  }
+
+.adding-button-picture{
+    width: 40px;
+}
+.delete-box{
+    margin-right: 10px;
+}
+.cash-blok{
+     width: 100%;
+}
+
+.cash-actions-width{
+    margin-left: 0px;
+}
+}

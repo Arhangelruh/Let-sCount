@@ -1,0 +1,65 @@
+﻿@using LetusCountApplication.Domain.Constants
+<html>
+<head>
+	   <meta name="viewport" content="width=device-width" />
+	   <title>@ViewBag.Title</title>
+	   <link href="~/css/app.css" rel="stylesheet" asp-append-version="true" />
+	   <link rel="icon" type="image/x-icon" href="~/images/favicon.png">
+	   @RenderSection("css", false)
+	</head>
+	<body>
+		
+	<div class="layout">
+    	<sidebar>
+			<div class="logo-bar">
+		       <a class="logo" asp-controller="Home" asp-action="Index">
+                  <img class="logo-image" title="logo" src="~/images/Logo.svg" />
+		       </a>
+		    </div>
+			@if (User.Identity.IsAuthenticated)
+			{
+				<div class="nav-menu">
+					<a class="nav-item" asp-controller="Search" asp-action="SearchByBanknote">
+						<img class="nav-item-ico" src="/images/Banknote.svg" />
+						<div class="nav-item-text">Купюры</div>
+					</a>
+					<a class="nav-item" asp-controller="Department" asp-action="GetActiveDepartments">
+						<img class="nav-item-ico" src="/images/Department.svg" />
+						<div class="nav-item-text">Подразделения</div>
+					</a>	
+					@if (User.IsInRole(Roles.Admin))
+					{
+						<a class="nav-item" asp-controller="Configuration" asp-action="Configuration">
+							<img class="nav-item-ico" src="/images/Settings.svg" />
+							<div class="nav-item-text">К настройкам</div>
+						</a>
+						<a class="nav-item" asp-controller="Profile" asp-action="UserProfiles">
+							<img class="nav-item-ico" src="/images/Profiles.svg" />
+							<div class="nav-item-text">Пользователи</div>
+						</a>
+					}
+					<a class="nav-item" asp-controller="Profile" asp-action="Profile">
+						<img class="nav-item-ico" src="/images/Profile.svg" />
+						<div class="nav-item-text">Профиль</div>
+					</a>
+					@RenderSection("NavExtra", false)
+				</div>				
+				<div class="sidebar-footer">
+					<form class="footer-item" method="post" asp-controller="Account" asp-action="Logout">
+						<button class="exit-button" id="exit-page" type="submit" title="Выход">
+							<img class="nav-item-ico" src="/images/Out.svg" />
+							<div class="nav-item-text">Выход</div>
+						</button>
+					</form>
+				</div>
+			}
+			</sidebar>	
+
+	    <div class="container">		
+		   @RenderBody()	
+		   <div class="body-footer"></div>
+	    </div>
+	</div>
+	@RenderSection("js", false)	
+	</body>
+</html>

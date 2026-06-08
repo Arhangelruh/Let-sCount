@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CashMachineViewModel>
+
+@section NavExtra {
+	<a class="nav-item" asp-controller="Configuration" asp-action="Configuration">
+		<img class="nav-item-ico" src="/images/Settings.svg" />
+		<div class="nav-item-text">К настройкам</div>
+	</a>
+}
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="configure-page-header">
+			<h4>Конфигурация Kisan</h4>
+		</div>
+		<div class="configure-page-body">
+			@if  (Model.Any())
+			{
+				<table class="configuration-table block-background">
+					<tr>
+						<th class="configuration-table-head">Серийный номер</th>
+						<th class="configuration-table-head">Инвентарный номер</th>
+						<th class="configuration-table-head"></th>
+					</tr>
+					@foreach(var cashMachine in Model)
+					{
+						<tr>
+							<td class="configuration-table-row configuration-table-firstrow">@cashMachine.Serial</td>
+							<td class="configuration-table-row">@cashMachine.Number</td>
+							<td class="configuration-table-row">
+								@if (!cashMachine.IsActive)
+								{
+									<a asp-controller="CashMachineConfiguration" asp-action="DeleteCashMachine" asp-route-machineId="@cashMachine.Id">
+										<div class="configuration-table-action"><img title="Удалить" src="/images/Delete.svg" /></div>
+									</a>
+								}
+							</td>							
+						</tr>
+					}
+				</table>
+			}
+			else
+			{
+				<div class="nonfound-message block-background">Не найдено зарегестрированных кассовых машин.</div>
+			}
+			<a asp-controller="CashMachineConfiguration" asp-action="AddCashMachine">
+			    <div class="configure-adding-button block-background">				
+				  <img class="adding-button-picture" src="~/images/Add_Button.svg" />
+			    </div>
+			</a>
+		</div>
+	</div>
+</div>
+
+@section css {
+	<link href="~/css/configuration.css" rel="stylesheet" asp-append-version="true" />
+}

@@ -1,0 +1,46 @@
+﻿@model CashViewModel
+
+
+<div class="wrapper">
+    <div class="page-body">
+        <div class="configure-page-header">
+            <h4>Добавление кассы</h4>
+        </div>
+        <div class="form-page-body">
+            <div class="text_error message">
+                @Html.ValidationMessage("Error")
+            </div>
+            <form class="form block-background" method="post" asp-controller="Cash" asp-action="EditCash">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="DepartmentId" />
+                <div class="form-label">
+                    <input class="form-field" asp-for="Name"/>
+                    <span asp-validation-for="Name" class="text_error"></span>
+                </div> 
+                @if (Model.CashMachine != null)
+                {
+                  <div class="form-label"> 
+                        <div class="label">Текущий Kisan:</div>
+                        <div class="form-field info-field">
+                       <div>
+                            @Model.CashMachine.Serial (@Model.CashMachine.Number)
+                       </div>
+                    </div>
+                  </div>
+                }
+                <div class="form-label">
+                    <select class="form-field" asp-for="SelectedCashMachineId" asp-items="Model.CashMachines">
+                        <option value="">Выберите новый Kisan при изменении</option>
+                    </select>
+                </div>
+                <div class="form-button">
+                    <input class="form-enter-button form-field" type="submit" value="Сохранить" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/configuration.css" rel="stylesheet" asp-append-version="true" />
+}

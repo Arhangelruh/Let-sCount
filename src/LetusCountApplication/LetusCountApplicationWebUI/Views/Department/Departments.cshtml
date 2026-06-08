@@ -1,0 +1,90 @@
+﻿@model List<DepartmentViewModel>
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="configure-page-header">
+			<h4>Конфигурация точек</h4>
+		</div>
+		<div class="configure-page-body">
+		@if(Model.Any()){
+				<div class="departments-list">
+		          @foreach(var department in Model)
+		          {
+			        <details class="department-details">
+							<summary class="department-summary block-background">
+								<div class="department-data">@department.Name</div>
+								<div class="department-data">@department.Address</div>
+								<div class="department-status">@(department.IsActive ? "Открыто" : "Закрыто")</div>								
+								<div class="slider-box">
+									<form class="slider-form" method="post" asp-controller="Department" asp-action="ChangeStatus">
+										<input type="hidden" name="departmentId" value="@department.Id" />
+										<input type="checkbox" class="slider" id="slide-@department.Id" checked="@department.IsActive" name="isActive" onchange="this.form.submit()" />
+									<label for="slide-@department.Id"></label>
+									</form>								
+								</div>
+								<a asp-controller="Department" asp-action="EditDepartment" asp-route-departmentId="@department.Id">
+									<div class="configuration-table-action  actions-width"><img title="Изменить" src="/images/Edit.svg" /></div>
+								</a>
+								<div class="delete-box">
+								  <a asp-controller="Department" asp-action="DeleteDepartment" asp-route-departmentId="@department.Id">
+									<div class="configuration-table-action"><img title="Удалить" src="/images/Delete.svg" /></div>
+								  </a>
+								</div>
+							</summary>
+							<div class="cash-blok block-background">
+								<div class="cash-list">
+									<div class="cash-info">
+							         @if(department.Cashes.Count !=0){
+				                       @foreach(var cash in department.Cashes)
+				                       {	
+									     <div class="cash">
+											<div class="cash-name">@cash.Name</div>
+											<div class="cash-extra-info"> @(cash.IsActive ? "Активна" : "Закрыта")</div>
+											<div class="cash-extra-info">@(cash.CashMachine != null ? cash.CashMachine.Serial : "Не настроен")</div>													
+											<div class="cash-actions">
+												<form class="slider-form actions-width" method="post" asp-controller="Cash" asp-action="ChangeStatus">
+													<input type="hidden" name="cashId" value="@cash.Id" />
+													<input type="checkbox" class="slider" id="cash-slide-@cash.Id" checked="@cash.IsActive" name="isActive" onchange="this.form.submit()" />
+													<label for="cash-slide-@cash.Id"></label>
+												</form>
+												<a asp-controller="Cash" asp-action="EditCash" asp-route-cashId="@cash.Id">
+													<div class="configuration-table-action  actions-width"><img title="Изменить" src="/images/Edit.svg" /></div>
+												</a>
+												<a asp-controller="Cash" asp-action="DeleteCash" asp-route-cashId="@cash.Id">
+													<div class="configuration-table-action actions-width"><img title="Удалить" src="/images/Delete.svg" /></div>
+												</a>
+											</div>
+										 </div>									     									
+								       }
+							    }
+							    else
+							    {
+								   <p>В данном подразделении не настроено ни одной кассы.</p>
+							    }
+									</div>
+								</div>								
+								<a class="cash-adding" asp-controller="Cash" asp-action="AddCash" asp-route-departmentId="@department.Id">
+									<div class="configure-cash-button block-background">
+										<img class="add-cash-button-picture" src="~/images/Add_Button.svg" />
+									</div>
+								</a>
+							</div>
+						</details>			
+		           }
+				</div>
+		}
+		else{
+			<div class="nonfound-message block-background">Не найдено зарегестрированных точек.</div>
+		}
+			<a asp-controller="Department" asp-action="AddDepartment">
+				<div class="configure-adding-button block-background">
+					<img class="adding-button-picture" src="~/images/Add_Button.svg" />
+				</div>
+			</a>
+		</div>
+    </div>
+</div>
+
+@section css {
+	<link href="~/css/configuration.css" rel="stylesheet" asp-append-version="true" />
+}

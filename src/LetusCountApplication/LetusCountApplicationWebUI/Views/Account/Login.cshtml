@@ -1,0 +1,38 @@
+﻿@model LoginViewModel
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="page-header">
+			<h4>Для продолжения вам необходимо авторизоваться.</h4>
+		</div>
+		<div class="page-body">
+			<form class="loginform" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">                               
+               <div asp-validation-summary="ModelOnly" class="text_error"></div>
+               <div class="loginform-label">                        
+                   <input class="loginform-field" asp-for="UserName" placeholder="Имя пользователя." />
+                   <span asp-validation-for="UserName" class="text_error"></span>
+               </div>
+               <div class="loginform-label">                        
+                   <input class="loginform-field" asp-for="Password" placeholder="Пароль" />
+                   <span asp-validation-for="Password" class="text_error"></span>
+               </div>      
+                <div class="loginform-label">
+                    <div class="remember-me">
+                       <label class="form-rememberme">Запомнить меня:</label>                    
+                       <div class="slider-box">
+                          <input type="checkbox" class="slider" id="slide" checked="" asp-for="RememberMe" />
+                          <label for="slide"></label>
+                       </div>
+                    </div>
+                </div>                
+                <div class="login-button">
+                    <input class="loginform-enter-button loginform-field" type="submit" value="Войти" />
+                </div>                    
+            </form>
+		</div>
+	</div>
+</div>
+
+@section css {
+    <link href="~/css/user.css" rel="stylesheet" asp-append-version="true" />
+}

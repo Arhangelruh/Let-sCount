@@ -1,0 +1,80 @@
+﻿@model OperationViewModel
+
+<div class="wrapper">
+	<div class="page-body">
+		<div class="page-header">
+			<h4>Информация об операции</h4>
+		</div>
+		<div class="page-content">
+			@if(Model != null)
+			{
+				<div class="operationbox">	
+					<div class="operation-info">
+						<div class="operation-main-info block-background">							
+							<div class="operation-departmentbox">
+						       <div class="operation-department-field">
+									<div class="operation-department-lable">Подразделение:</div>
+									<div class="operation-department-data">@Model.Department</div>
+								   </div>
+								<div class="operation-department-field">
+									<div class="operation-department-lable">Касса:</div>
+									<div class="operation-department-data">@Model.Cash</div>
+								</div>
+								<div class="operation-department-field">
+									<div class="operation-department-lable">Kisan:</div>
+									<div class="operation-department-data">@Model.MachineSerial</div>
+								</div>						       						       
+							</div>
+						</div>
+						<div class="operation-datetime-box block-background">
+							<div class="operation-datetime-info">
+						       <div>Начало пересчета: @Model.StartTime.ToString("dd.MM.yyyy HH:mm:ss")</div>
+					     	   <div>Конец пересчета: @Model.EndTime.ToString("dd.MM.yyyy HH:mm:ss")</div>
+							</div>
+						</div>
+					</div>
+					@if(Model.OperationUnits != null && Model.OperationUnits.Any())
+					{
+					  @foreach(var unit in Model.OperationUnits)
+					  {
+							<details class="operationunit-details">
+								<summary class="operationunit-sammary block-background">
+								   <div>Валюта: @unit.Currency</div>
+     							   <div>Сумма: @unit.Sum</div>
+								</summary>
+							@if(unit.operationBanknotes.Any())
+								{
+									<div class="banknotebox block-background">
+										<table class="banknote-table">
+											<tr>
+												<th>Серийный номер</th>
+												<th>Модификация</th>
+												<th>Номинал</th>
+											</tr>
+									@foreach(var banknote in unit.operationBanknotes)
+									{
+											<tr>
+												<td>@banknote.SerialNumber</td>
+												<td>@banknote.DenomName</td>
+												<td>@banknote.Value</td>
+											</tr>											
+									}
+									   </table>
+									</div>
+								}
+							</details>
+					  }					
+					}
+				</div>
+			}
+			else
+			{
+				<div class="nonfound-message block-background">Информация по искомой операции не найдена.</div>
+			}
+		</div>
+    </div>
+</div>
+
+@section css {
+	<link href="~/css/operation.css" rel="stylesheet" asp-append-version="true" />
+}

@@ -1,0 +1,13 @@
+.error-title{
+    color: red;
+}
+
+.error_mesage{
+    margin: 20px;
+}
+
+.error_text{
+    margin-left: 20px;
+    margin-right: 20px;
+    color: red;
+}

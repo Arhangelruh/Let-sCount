@@ -1,0 +1,73 @@
+.operationbox{
+    width: 90%;
+}
+
+.operation-info{
+    display: flex;
+}
+
+.operation-main-info{
+    display: flex;       
+    align-items: center;    
+    min-width: 300px; 
+    width: 60%;   
+}
+
+.operation-departmentbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.operation-department-field{
+    display: flex;  
+    align-items: center;
+    min-height: 30px;
+}
+
+.operation-department-lable{
+      min-width: 130px;
+      display: flex;      
+}
+
+.operation-datetime-info{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100px;
+    justify-content: space-around;
+    margin: 20px;    
+}
+
+.operation-datetime-box{
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.operationunit-details{
+margin-top: 20px;
+}
+
+.operationunit-sammary{
+    min-height: 40px;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.banknote-table{
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    
+.operationbox{
+    width: 100%;
+}
+}

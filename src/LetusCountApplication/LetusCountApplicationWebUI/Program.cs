@@ -1,0 +1,61 @@
+using LetusCountApplication.Application;
+using LetusCountApplication.Application.Services;
+using LetusCountApplication.Infrastructure;
+using NLog;
+using NLog.Web;
+
+var logger = LogManager.Setup()
+	.LoadConfigurationFromAppSettings()
+	.GetCurrentClassLogger();
+try
+{
+	var builder = WebApplication.CreateBuilder(args);
+
+	builder.Logging.ClearProviders();
+	builder.Host.UseNLog();
+	builder.Services.AddApplication();
+	builder.Services.AddInfrastructure(builder.Configuration);
+	builder.Services.AddControllersWithViews();
+
+	// Add services to the container.
+	builder.Services.AddRazorPages();
+
+	var app = builder.Build();
+
+	// Configure the HTTP request pipeline.
+	if (!app.Environment.IsDevelopment())
+	{
+		app.UseExceptionHandler("/Error");
+		app.UseStatusCodePagesWithReExecute("/Error/{0}");
+	}
+
+	using (var scope = app.Services.CreateScope())
+	{
+		var services = scope.ServiceProvider;
+		await Initializer.InitializeAsync(services);
+	}
+
+	app.UseHttpsRedirection();
+
+	app.UseRouting();
+
+	app.UseAuthentication();
+	app.UseAuthorization();
+
+	app.MapControllerRoute(
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+	app.MapStaticAssets();
+	app.MapRazorPages()
+	   .WithStaticAssets();
+
+	app.Run();
+}
+catch (Exception ex)
+{
+	logger.Error(ex, "Application stopped due to exception");
+	throw;
+}
+finally
+{ LogManager.Shutdown(); }

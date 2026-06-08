@@ -1,0 +1,32 @@
+﻿@model ProfileViewModel
+
+<div class="wrapper">
+    <div class="page-body">
+        <div class="page-header">
+            <h4>Редактировать профиль.</h4>
+        </div>
+        <div class="page-body">
+        <form class="form" method="post" asp-controller="Profile" asp-action="EditProfile">
+            <div class="forms-label">                
+                <input class="forms-field" asp-for="LastName"/>
+                <span asp-validation-for="LastName" class="text_error"></span>
+            </div>
+            <div class="forms-label">                
+                <input class="forms-field" asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="text_error"></span>
+            </div>
+            <div class="forms-label">                
+                <input class="forms-field" asp-for="MiddleName" />
+                <span asp-validation-for="MiddleName" class="text_error"></span>
+            </div>
+            <div class="forms-label">
+                <input class="button_classic" type="submit" value="Сохранить" />
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/user.css" rel="stylesheet" asp-append-version="true" />
+}

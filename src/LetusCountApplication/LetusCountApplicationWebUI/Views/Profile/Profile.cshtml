@@ -1,0 +1,36 @@
+﻿@model ProfileViewModel
+
+<div class="wrapper">
+    <div class="page-body">
+        <div class="page-header">
+            <h4>Ваш профиль: @User.Identity.Name</h4>
+        </div>
+        <div class="page-body">      
+            <div class="profile">
+                <div class="profile-label">
+                   <div class="profile-field">
+                        Фамилия: @Model.LastName
+                   </div>
+                </div>
+                <div class="profile-label">
+                    <div  class="profile-field"> Имя: @Model.FirstName</div>
+                </div>
+                <div class="profile-label">
+                    <div class="profile-field"> Отчество: @Model.MiddleName</div>
+                </div>
+                <div class="profile-buttons">
+                    <a class="button_profile" asp-controller="Profile" asp-action="EditProfile">
+                        Изменить профиль
+                    </a>
+                    <a class="button_profile" asp-controller="Account" asp-action="ChangePassword">
+                        Изменить пароль
+                    </a>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/user.css" rel="stylesheet" asp-append-version="true" />
+}
