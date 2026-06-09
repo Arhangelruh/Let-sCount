@@ -196,6 +196,7 @@ namespace LetusCountService
 				catch (Exception ex)
 				{
 					_logger.LogError(ex, "Error processing {File}", file);
+					await SendMessageAsync($"Error: can't save data to database from file: {file}. Exception:{ex.Message}", ct);
 				}
 			}
 		}
